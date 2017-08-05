@@ -1,2 +1,3 @@
 hug -> For creating the API.
 ponyorm -> For creating the models.
+sqlite -> For simple database (testing)
