@@ -3,7 +3,8 @@ from __future__ import absolute_import, print_function
 from decimal import Decimal
 from datetime import date
 
-from pony.orm.core import *
+from pony.orm import *
+
 
 db = Database()
 
