@@ -19,3 +19,8 @@ Please ensure that the rules stated are followed
 	* An Admin is an elevated User.
 	* An Admin can create courses.
 	* An Admin can set up course register options.
+* Endpoints to be created (Create without any restrictions, we will add restrictions later)
+	* /course/ _Course CRUD endpoint._
+	* /user/ _User CRUD endpoint._
+	* /group/ _Group CRUD end point._
+	* /user/registerCourse/ _Endpoint for User to register courses._

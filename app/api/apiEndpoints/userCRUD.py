@@ -41,7 +41,7 @@ def readById(
     id: hug.types.number
 ):
     # Clean the inputs
-    user = select(u for u in User if u.id == id)
+    user = User[id]
 
     return {
         'user':{
@@ -83,6 +83,7 @@ def update(
         }
     }
 
+# Dint delete yet, as have to change many things before/after the user is deleted
 
 @db_session
 def deleteByEmail(

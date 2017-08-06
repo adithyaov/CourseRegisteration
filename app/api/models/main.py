@@ -19,14 +19,14 @@ class Group(db.Entity):
     id = PrimaryKey(int, auto=True)
     name = Required(str)
     code = Required(str, unique=True)
-    description = Optional(str)
+    description = Required(str)
     users = Set('User') # A Group can have many Users.
     courses = Set('Course') # A Group can avail many Courses.
 
 class Course(db.Entity):
     id = PrimaryKey(int, auto=True)
     name = Required(str)
-    description = Optional(str)
+    description = Required(str)
     code = Required(str, unique=True)
     details = Required(str) # Json format
     groups = Set('Group') # A Course is available to many Groups.
