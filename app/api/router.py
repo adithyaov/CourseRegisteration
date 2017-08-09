@@ -4,7 +4,9 @@ sys.path.append('/home/altair/Prog/courseApp/app/api')
 
 import hug
 from apiEndpoints.helloWorld import hello as hello
-from apiEndpoints.userCrud import *
+from apiEndpoints.userCRUD import *
+from apiEndpoints.courseCRUD import *
+from apiEndpoints.groupCRUD import *
 
 router = hug.route.API(__name__)
 
