@@ -3,27 +3,47 @@ import './style.css';
 import TopNav from '../TopNav';
 import SideNav from '../SideNav';
 import DefaultContent from '../DefaultContent';
+import CoursesDisplay from '../CoursesDisplay';
+import AddCourse from '../AddCourse';
+import CourseEdit from '../CourseEdit';
+import AllGroups from '../AllGroups';
+import { HashRouter, Switch, Route } from 'react-router-dom'
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
       status: 'loggedOut',
-      googleToken: 'None'
+      accessToken: 'None',
+      editCourse: {
+        valid: 0,
+        code: 'None',
+        id: -1
+      } 
     };
   }
 
-  setSession(status, googleToken){
+  setSession(status, accessToken){
     this.setState({
       status: status,
-      googleToken: googleToken
+      accessToken: accessToken
+    });
+  }
+
+  setEditCourseState(code, id){
+    this.setState({
+      editCourse: {
+        valid: 1,
+        code: code,
+        id: id
+      }
     });
   }
 
   throwSession(){
     this.setState({
       status: 'loggedOut',
-      googleToken: 'None'
+      accessToken: 'None'
     });
   }
 
@@ -37,7 +57,15 @@ class App extends Component {
               <SideNav status={this.state.status} setSession={this.setSession.bind(this)} throwSession={this.throwSession.bind(this)}/>
             </div>
             <div className="col">
-              <DefaultContent status={this.state.status}/>
+              <HashRouter>
+                <Switch>
+                  <Route exact path='/' render={() => (<DefaultContent status={this.state.status} />)} />
+                  <Route path='/all-courses' render={() => (<CoursesDisplay status={this.state.status} />)} />
+                  <Route path='/add-course' render={() => (<AddCourse status={this.state.status} />)} />
+                  <Route path='/edit-course' render={() => (<CourseEdit status={this.state.status} editCourse={this.state.editCourse} />)} />
+                  <Route path='/all-groups' render={() => (<AllGroups status={this.state.status} />)} />
+                </Switch>
+              </HashRouter>
             </div>
           </div>
         </div>

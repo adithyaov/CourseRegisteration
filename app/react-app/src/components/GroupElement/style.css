@@ -1,0 +1,24 @@
+.custom-restricted-width {
+    /* To limit the menu width to the content of the menu: */
+    display: inline-block;
+    /* Or set the width explicitly: */
+    /* width: 10em; */
+}
+
+.card {
+	margin-bottom: 12px;
+    border-radius: 0;
+}
+
+.card-group-elm {
+    border: none;
+    border-left: 2px solid #c0c0c0;
+}
+
+.card-group-elm:hover {
+    border-left: 2px solid #999999;
+}
+
+.card-group-elm .courses-display-sub-element{
+    margin-right: 4px;
+}

@@ -8,7 +8,7 @@ var SideNav = (props) => {
 	var bodyStack = {};
 
 	const responseSuccessGoogle = (response) => {
-  	props.setSession('user', response.tokenId)
+  	props.setSession('admin', response.tokenId)
 	}
 
 	const responseFailureGoogle = (response) => {
@@ -19,10 +19,10 @@ var SideNav = (props) => {
 		bodyStack['common'] = (
 			<div>
 			  <li className="nav-item">
-			    <a className="nav-link" href="#">My Courses</a>
+			    <a className="nav-link" href="/#/all-courses">All Courses</a>
 			  </li>
 			  <li className="nav-item">
-			    <a className="nav-link" href="#">Select Courses</a>
+			    <a className="nav-link" href="#">My Courses</a>
 			  </li>
 			  <li className="nav-item">
 			    <a className="nav-link" href="#">Calander</a>
@@ -35,7 +35,10 @@ var SideNav = (props) => {
 		bodyStack['admin'] = (
 			<div>
 			  <li className="nav-item">
-			    <a className="nav-link" href="#">Admin Panel</a>
+			    <a className="nav-link" href="/#/add-courses">Add Course</a>
+			  </li>
+			  <li className="nav-item">
+			    <a className="nav-link" href="/#/">Manage Courses</a>
 			  </li>
 			</div>
 		)
@@ -49,7 +52,7 @@ var SideNav = (props) => {
 				  buttonText="Login with Google"
 				  onSuccess={responseSuccessGoogle}
 				  onFailure={responseFailureGoogle}
-				  className="btn btn-primary"
+				  className="btn btn-danger"
 				 />
 			</div>
 		)

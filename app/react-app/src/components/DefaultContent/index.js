@@ -11,6 +11,8 @@ var DefaultContent = (props) => {
 	  		<strong>Heads up!</strong> Please Login to get started :-).
 			</div>
 		)
+	}else{
+		loginALert = ''
 	}
 
 	return (
