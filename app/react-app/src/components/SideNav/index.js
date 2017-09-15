@@ -2,7 +2,6 @@ import React from 'react';
 import './style.css'
 import GoogleLogin from 'react-google-login';
 
-
 var SideNav = (props) => {
 
 	var bodyStack = {};
@@ -35,7 +34,7 @@ var SideNav = (props) => {
 		bodyStack['admin'] = (
 			<div>
 			  <li className="nav-item">
-			    <a className="nav-link" href="/#/add-courses">Add Course</a>
+			    <a className="nav-link" href="/#/add-course">Add Course</a>
 			  </li>
 			  <li className="nav-item">
 			    <a className="nav-link" href="/#/">Manage Courses</a>

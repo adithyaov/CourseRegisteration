@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css'
 import CourseElement from '../CourseElement'
 
-var CoursesDisplay = (props) => {
+var AllCourses = (props) => {
 
 
 	return (
@@ -21,4 +21,4 @@ var CoursesDisplay = (props) => {
 	);
 }
 
-export default CoursesDisplay;
+export default AllCourses;

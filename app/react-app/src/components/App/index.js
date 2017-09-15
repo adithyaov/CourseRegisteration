@@ -3,10 +3,13 @@ import './style.css';
 import TopNav from '../TopNav';
 import SideNav from '../SideNav';
 import DefaultContent from '../DefaultContent';
-import CoursesDisplay from '../CoursesDisplay';
+import AllCourses from '../AllCourses';
 import AddCourse from '../AddCourse';
 import CourseEdit from '../CourseEdit';
 import AllGroups from '../AllGroups';
+import AddGroup from '../AddGroup';
+import MyGroups from '../MyGroups';
+import MyCourses from '../MyCourses';
 import { HashRouter, Switch, Route } from 'react-router-dom'
 
 class App extends Component {
@@ -30,21 +33,16 @@ class App extends Component {
     });
   }
 
-  setEditCourseState(code, id){
-    this.setState({
-      editCourse: {
-        valid: 1,
-        code: code,
-        id: id
-      }
-    });
-  }
-
   throwSession(){
     this.setState({
       status: 'loggedOut',
       accessToken: 'None'
     });
+  }
+
+  getHashParams(){
+    var parts = window.location.hash.split("|json|")
+    return parts[1];
   }
 
   render() {
@@ -57,13 +55,17 @@ class App extends Component {
               <SideNav status={this.state.status} setSession={this.setSession.bind(this)} throwSession={this.throwSession.bind(this)}/>
             </div>
             <div className="col">
+              
               <HashRouter>
                 <Switch>
                   <Route exact path='/' render={() => (<DefaultContent status={this.state.status} />)} />
-                  <Route path='/all-courses' render={() => (<CoursesDisplay status={this.state.status} />)} />
+                  <Route path='/all-courses' render={() => (<AllCourses status={this.state.status} />)} />
                   <Route path='/add-course' render={() => (<AddCourse status={this.state.status} />)} />
-                  <Route path='/edit-course' render={() => (<CourseEdit status={this.state.status} editCourse={this.state.editCourse} />)} />
+                  <Route path='/add-group' render={() => (<AddGroup status={this.state.status} />)} />
+                  <Route path='/edit-course' render={() => (<CourseEdit status={this.state.status} />)} />
                   <Route path='/all-groups' render={() => (<AllGroups status={this.state.status} />)} />
+                  <Route path='/my-groups' render={() => (<MyGroups status={this.state.status} />)} />
+                  <Route path='/my-courses' render={() => (<MyCourses status={this.state.status} />)} />
                 </Switch>
               </HashRouter>
             </div>
