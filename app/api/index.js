@@ -40,13 +40,20 @@ var endPoints = require(rootPath + '/src/endPoints/index.js')()
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
-endPointsHelper.forEach((value) => {
-    switch(value.method){
-        case 'get': server.get(value.pattern, value.target)
-    }
-});
+connection.sync()
+.then(() => {
 
-server.listen(8080, function() {
-    console.log('%s listening at %s', server.name, server.url);
-});
-  
+    endPointsHelper.forEach((value) => {
+        switch(value.method){
+            case 'get': server.get(value.pattern, value.target); break;
+            case 'post': server.post(value.pattern, value.target); break;
+            case 'put': server.put(value.pattern, value.target); break;
+            case 'delete': server.delete(value.pattern, value.target); break;
+        }
+    });
+
+    server.listen(8080, function() {
+        console.log('%s listening at %s', server.name, server.url);
+    });
+    
+})
