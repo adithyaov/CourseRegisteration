@@ -47,7 +47,6 @@ jwtHelper.encode({type: 0}, (error, token) => {
     if (error) {
         console.log('Error')
     }else{
-        console.log(accessControlHelper)
         console.log(accessControlHelper(token))
     }
 })

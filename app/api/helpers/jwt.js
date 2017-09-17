@@ -1,7 +1,7 @@
 module.exports = (jwt, jwtConfig) => {
     return {
         encode: (payload, callback) => {
-            jwt.sign(
+            return jwt.sign(
                 {
                     payload: payload
                 }, 
@@ -11,15 +11,15 @@ module.exports = (jwt, jwtConfig) => {
                     expiresIn: jwtConfig['expiresIn']
                 },
                 (error, token) => {
-                    callback(error, token)
+                    return callback(error, token)
                 }
             )
         },
 
         decode: (token, callback) => {
-            jwt.verify(token, jwtConfig['secret'],
+            return jwt.verify(token, jwtConfig['secret'],
             (error, decoded) => {
-                callback(error, decoded)
+                return callback(error, decoded)
             })
         }
     }
