@@ -7,7 +7,7 @@ module.exports = (Resource, User) => {
 			return User.create({
 				name: name,
 				email: email,
-				type: 'member'
+				type: 1
 			})
 			.then(user => {
 				return user.get({

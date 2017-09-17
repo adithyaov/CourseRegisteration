@@ -1,4 +1,4 @@
-var rootPath = '/home/altair/Prog/courseApp/app/testing/make-scratch'
+var rootPath = '/home/altair/Prog/courseApp/app/api'
 
 var Sequelize = require('sequelize')
 var jwt = require('jsonwebtoken')
@@ -40,20 +40,32 @@ var endPoints = require(rootPath + '/src/endPoints/index.js')()
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
-connection.sync()
-.then(() => {
+var accessControlConfig = require(rootPath + '/config/accessControl.js')
+var accessControlHelper = require(rootPath + '/helpers/accessControl.js')(accessControlConfig, jwtHelper.decode)
 
-    endPointsHelper.forEach((value) => {
-        switch(value.method){
-            case 'get': server.get(value.pattern, value.target); break;
-            case 'post': server.post(value.pattern, value.target); break;
-            case 'put': server.put(value.pattern, value.target); break;
-            case 'delete': server.delete(value.pattern, value.target); break;
-        }
-    });
-
-    server.listen(8080, function() {
-        console.log('%s listening at %s', server.name, server.url);
-    });
-    
+jwtHelper.encode({type: 0}, (error, token) => {
+    if (error) {
+        console.log('Error')
+    }else{
+        console.log(accessControlHelper)
+        console.log(accessControlHelper(token))
+    }
 })
+
+// connection.sync()
+// .then(() => {
+
+//     endPointsHelper.forEach((value) => {
+//         switch(value.method){
+//             case 'get': server.get(value.pattern, value.target); break;
+//             case 'post': server.post(value.pattern, value.target); break;
+//             case 'put': server.put(value.pattern, value.target); break;
+//             case 'delete': server.delete(value.pattern, value.target); break;
+//         }
+//     });
+
+//     server.listen(8080, function() {
+//         console.log('%s listening at %s', server.name, server.url);
+//     });
+    
+// })
