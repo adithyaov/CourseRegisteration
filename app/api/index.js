@@ -39,23 +39,26 @@ const restifyBodyParser = require('restify-plugins').bodyParser;
 server.use(restifyBodyParser({ mapParams: true }));
 
 
-var endPoints = require(rootPath + '/src/endPoints/index.js')(userFunctions, resourceFunctions, groupFunctions, courseFunctions)
+var accessControlConfig = require(rootPath + '/config/accessControl.js')
+var accessControlHelper = require(rootPath + '/helpers/accessControl.js')(accessControlConfig, jwtHelper.decode)
+
+var restifyErrors = require('restify-errors');
+
+var endPoints = require(rootPath + '/src/endPoints/index.js')(userFunctions, resourceFunctions, groupFunctions, courseFunctions, accessControlHelper, restifyErrors)
 
 console.log(endPoints)
 
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
-var accessControlConfig = require(rootPath + '/config/accessControl.js')
-var accessControlHelper = require(rootPath + '/helpers/accessControl.js')(accessControlConfig, jwtHelper.decode)
+jwtHelper.encode({type: 3, name: 'Adithya Kumar'}, (error, token) => {
+    if (error) {
+        console.log('Error')
+    }else{
+        console.log(token)
+    }
+})
 
-// jwtHelper.encode({type: 0}, (error, token) => {
-//     if (error) {
-//         console.log('Error')
-//     }else{
-//         console.log(accessControlHelper(token))
-//     }
-// })
 
 
 connection.sync()
