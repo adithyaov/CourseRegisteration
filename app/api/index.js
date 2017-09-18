@@ -35,36 +35,44 @@ var jwtHelper = require(rootPath + '/helpers/jwt.js')(jwt, require(rootPath + '/
 // })
 
 var server = restify.createServer();
+const restifyBodyParser = require('restify-plugins').bodyParser;
+server.use(restifyBodyParser({ mapParams: true }));
 
-var endPoints = require(rootPath + '/src/endPoints/index.js')()
+
+var endPoints = require(rootPath + '/src/endPoints/index.js')(userFunctions, resourceFunctions, groupFunctions, courseFunctions)
+
+console.log(endPoints)
+
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
 var accessControlConfig = require(rootPath + '/config/accessControl.js')
 var accessControlHelper = require(rootPath + '/helpers/accessControl.js')(accessControlConfig, jwtHelper.decode)
 
-jwtHelper.encode({type: 0}, (error, token) => {
-    if (error) {
-        console.log('Error')
-    }else{
-        console.log(accessControlHelper(token))
-    }
-})
-
-// connection.sync()
-// .then(() => {
-
-//     endPointsHelper.forEach((value) => {
-//         switch(value.method){
-//             case 'get': server.get(value.pattern, value.target); break;
-//             case 'post': server.post(value.pattern, value.target); break;
-//             case 'put': server.put(value.pattern, value.target); break;
-//             case 'delete': server.delete(value.pattern, value.target); break;
-//         }
-//     });
-
-//     server.listen(8080, function() {
-//         console.log('%s listening at %s', server.name, server.url);
-//     });
-    
+// jwtHelper.encode({type: 0}, (error, token) => {
+//     if (error) {
+//         console.log('Error')
+//     }else{
+//         console.log(accessControlHelper(token))
+//     }
 // })
+
+
+connection.sync()
+.then(() => {
+
+    endPointsHelper.forEach((value) => {
+        console.log(value)
+        switch(value.method){
+            case 'get': server.get(value.pattern, value.target); break;
+            case 'post': server.post(value.pattern, value.target); break;
+            case 'put': server.put(value.pattern, value.target); break;
+            case 'del': server.delete(value.pattern, value.target); break;
+        }
+    });
+
+    server.listen(8080, function() {
+        console.log('%s listening at %s', server.name, server.url);
+    });
+    
+})

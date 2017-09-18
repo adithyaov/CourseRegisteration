@@ -3,7 +3,7 @@ module.exports = {
     targetsToConsider: ['hello', 'chooseCourse', 'displayCourses'],
     accessTargets: {
         hello: 'everyone',
-        chooseCourse: 'user',
-        displayCourses: 'everyone'
+        createUser: 'everyone',
+        displayUser: 'everyone'
     }
 }

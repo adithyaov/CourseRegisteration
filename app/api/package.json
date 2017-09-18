@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "jsonwebtoken": "^8.0.1",
     "restify": "^5.2.0",
+    "restify-plugins": "^1.6.0",
     "rootpath": "^0.1.2",
     "sequelize": "^4.8.2",
     "sqlite3": "^3.1.10"
