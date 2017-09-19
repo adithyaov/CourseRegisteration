@@ -16,7 +16,7 @@ module.exports = (groupFunctions, resourceFunctions, accessControlHelper, restif
             })
         })
         .catch((error) => {
-            return next(new restifyErrors.InvalidArgumentError(error))
+            return next(new restifyErrors.InternalServerError(error))
         })
     }
 }

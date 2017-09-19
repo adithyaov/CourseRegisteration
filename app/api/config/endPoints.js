@@ -13,17 +13,15 @@ module.exports = {
 
         {pattern: '/resource/update', method: 'put', target: 'updateResource'},
         {pattern: '/resource/delete', method: 'delete', target: 'deleteResource'},
+
+
+        {pattern: '/course/join', method: 'post', target: 'chooseCourse'},
     ]
 }
 
 
-// {pattern: '/course/:id/join', method: 'post', target: 'chooseCourse'},
 // {pattern: '/courses', method: 'get', target: 'displayCourses'},
-// {pattern: '/groups', method: 'get', target: 'displayGroups'},
-// {pattern: '/resource/:id', method: 'get', target: 'displayResource'},
+// {pattern: '/groups', method: 'get', target: 'displayGroups'}
 
 // {pattern: '/user/:id/change-access', method: 'post', target: 'changeAccess'},
 // {pattern: '/token/issue', method: 'post', target: 'issueToken'}
-
-// {pattern: '/resource/update/:id', method: 'put', target: 'updateResource'},
-// {pattern: '/resource/delete/:id', method: 'delete', target: 'deleteResource'},

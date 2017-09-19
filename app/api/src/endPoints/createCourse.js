@@ -16,7 +16,7 @@ module.exports = (courseFunctions, resourceFunctions, accessControlHelper, resti
             })
         })
         .catch((error) => {
-            return next(new restifyErrors.InvalidArgumentError(error))
+            return next(new restifyErrors.InternalServerError(error))
         })
     }
 }

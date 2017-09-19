@@ -31,14 +31,16 @@ module.exports = (Resource, User) => {
 		},
 
 		addResources: (resourceIds, userId) => {
-			Resource.findAll({
+			return Resource.findAll({
 			  where: {
 			    id: resourceIds
 			  }
 			})
 			.then((resources) => {
-				User.findById(userId).then((user) => {
-					user.setResources(resources)
+				return User.findById(userId).then((user) => {
+					return user.setResources(resources).then((resources) => {
+						return resources
+					})
 				})
 			})
 		}

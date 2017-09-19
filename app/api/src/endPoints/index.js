@@ -10,11 +10,14 @@ module.exports = (userFunctions, resourceFunctions, groupFunctions, courseFuncti
 
         updateResource: require('./updateResource.js')(resourceFunctions, accessControlHelper, restifyErrors),
         deleteResource: require('./deleteResource.js')(resourceFunctions, accessControlHelper, restifyErrors),
+    
+    
+        chooseCourse: require('./chooseCourse.js')(userFunctions, accessControlHelper, restifyErrors),
+    
     }
 }
 
 // changeAccess: require('./changeAccess.js')(),
 // issueToken: require('./issueToken.js')(),
-// chooseCourse: require('./chooseCourse.js')(),
 // displayCourses: require('./displayCourses.js')(),
 // displayGroups: require('./displayGroups.js')(),
