@@ -1,4 +1,4 @@
-module.exports = (userFunctions, resourceFunctions, accessControlHelper, restifyErrors) => {
+module.exports = (resourceFunctions, accessControlHelper, restifyErrors) => {
     return (req, res, next) => {
 
         const checkAccess = accessControlHelper(req.params.token)
@@ -15,9 +15,14 @@ module.exports = (userFunctions, resourceFunctions, accessControlHelper, restify
             if (resource.type != 'group') {
                 return next(new restifyErrors.NotFoundError('This resource is not a group'))
             }
-
-            // Rewrite few functions or change design!
-
+            resourceFunctions.addUsers(req.params.userIds, req.params.groupId)
+            .then((users) => {
+                res.json({status: true, message: 'Added users', statusUsers: users})
+                return next()
+            })
+            .catch((error) => {
+                return next(new restifyErrors.InternalServerError(error))
+            })
 
         })
 

@@ -48,7 +48,7 @@ module.exports = (Resource, User) => {
 		},
 
 		addResources: (addIds, toId) => {
-			Resource.findAll({
+			return Resource.findAll({
 			  where: {
 			    id: addIds
 			  }
@@ -56,6 +56,21 @@ module.exports = (Resource, User) => {
 			.then((resources) => {
 				Resource.findById(toId).then((resource) => {
 					resource.setResourceItems(resources)
+				})
+			})
+		},
+
+		addUsers: (userIds, resourceId) => {
+			return User.findAll({
+			  where: {
+			    id: userIds
+			  }
+			})
+			.then((users) => {
+				return Resource.findById(resourceId).then((resource) => {
+					return resource.setUsers(userIds).then((users) => {
+						return users
+					})
 				})
 			})
 		}
