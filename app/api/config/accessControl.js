@@ -2,7 +2,7 @@ module.exports = {
     types: {everyone: 0, user: 1, owner: 2, admin: 3},
     targetsToConsider: ['hello', 'chooseCourse', 'displayCourses',
                         'displayResource', 'createCourse', 'createGroup',
-                        'chooseCourse'],
+                        'chooseCourse', 'addUsersToGroup'],
     accessTargets: {
         hello: 'everyone',
         createUser: 'everyone',
@@ -14,6 +14,7 @@ module.exports = {
         createCourse: 'owner',
 
         chooseCourse: 'user',
+        addUsersToGroup: 'owner'
     }
 }
 

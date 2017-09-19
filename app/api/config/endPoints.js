@@ -16,6 +16,7 @@ module.exports = {
 
 
         {pattern: '/course/join', method: 'post', target: 'chooseCourse'},
+        {pattern: '/group/add', method: 'post', target: 'addUsersToGroup'},
     ]
 }
 

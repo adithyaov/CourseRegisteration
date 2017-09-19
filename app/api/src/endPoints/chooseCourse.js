@@ -18,3 +18,5 @@ module.exports = (userFunctions, accessControlHelper, restifyErrors) => {
 
     }
 }
+
+// This is improper, make it proper or change design
