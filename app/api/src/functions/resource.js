@@ -50,12 +50,15 @@ module.exports = (Resource, User) => {
 		addResources: (addIds, toId) => {
 			return Resource.findAll({
 			  where: {
-			    id: addIds
+				id: addIds,
+				type: 'course'
 			  }
 			})
 			.then((resources) => {
-				Resource.findById(toId).then((resource) => {
-					resource.setResourceItems(resources)
+				return Resource.findById(toId).then((group) => {
+					return group.setResourceItems(resources).then((courses) => {
+						return courses
+					})
 				})
 			})
 		},
