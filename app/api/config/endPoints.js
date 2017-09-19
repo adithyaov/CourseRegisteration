@@ -10,6 +10,9 @@ module.exports = {
 
         {pattern: '/course/create', method: 'post', target: 'createCourse'},
         {pattern: '/group/create', method: 'post', target: 'createGroup'},
+
+        {pattern: '/resource/update', method: 'put', target: 'updateResource'},
+        {pattern: '/resource/delete', method: 'delete', target: 'deleteResource'},
     ]
 }
 

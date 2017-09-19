@@ -18,7 +18,7 @@ module.exports = (Resource, User) => {
 
 		update: (id, name, meta) => {
 			return Resource.findById(id).then((resource) => {
-				return resource.get({plain: true})
+				return resource
 			})
 			.then((resource) => {
 				fieldsToUpdate = []
@@ -40,8 +40,9 @@ module.exports = (Resource, User) => {
 				return resource
 			})
 			.then((resource) => {
-				User.findById(ownerId).then((user) => {
+				return User.findById(ownerId).then((user) => {
 					resource.setOwner(user)
+					return resource.get({plain: true})
 				})
 			})
 		},

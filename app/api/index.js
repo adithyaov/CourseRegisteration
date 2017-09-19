@@ -51,12 +51,15 @@ console.log(endPoints)
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
-jwtHelper.encode({type: 3, name: 'Adithya Kumar'}, (error, token) => {
-    if (error) {
-        console.log('Error')
-    }else{
-        console.log(token)
-    }
+userFunctions.create('Adithya owner', 'a@b.com')
+.then((user) => {
+    jwtHelper.encode({id: user.id, type: 3, name: user.name}, (error, token) => {
+        if (error) {
+            console.log('Error')
+        }else{
+            console.log(token)
+        }
+    })
 })
 
 
@@ -70,7 +73,7 @@ connection.sync()
             case 'get': server.get(value.pattern, value.target); break;
             case 'post': server.post(value.pattern, value.target); break;
             case 'put': server.put(value.pattern, value.target); break;
-            case 'del': server.delete(value.pattern, value.target); break;
+            case 'delete': server.del(value.pattern, value.target); break;
         }
     });
 

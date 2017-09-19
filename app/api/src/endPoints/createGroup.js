@@ -1,4 +1,4 @@
-module.exports = (groupFunctions, accessControlHelper, restifyErrors) => {
+module.exports = (groupFunctions, resourceFunctions, accessControlHelper, restifyErrors) => {
     return (req, res, next) => {
 
         const checkAccess = accessControlHelper(req.params.token)
@@ -9,11 +9,14 @@ module.exports = (groupFunctions, accessControlHelper, restifyErrors) => {
 
         groupFunctions.create(req.params.name, req.params.code, req.params.meta)
         .then((resource) => {
-            res.json({name: resource.name, type: resource.type, code: resource.code, meta: resource.meta})
-            return next()
+            resourceFunctions.setOwner(resource.id, checkAccess.payload.id)
+            .then((resource) => {
+                res.json({id: resource.id, name: resource.name, type: resource.type, code: resource.code, meta: resource.meta})
+                return next()
+            })
         })
         .catch((error) => {
-            return next(new Error(error))
+            return next(new restifyErrors.InvalidArgumentError(error))
         })
     }
 }

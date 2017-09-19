@@ -1,13 +1,25 @@
-module.exports = (userFunctions) => {
+module.exports = (resourceFunctions, accessControlHelper, restifyErrors) => {
     return (req, res, next) => {
-        console.log(req.params)
-        userFunctions.create(req.params.name, req.params.email)
-        .then((user) => {
-            res.json({name: user.name, email: user.email})
-            return next()
-        })
-        .catch((error) => {
-            return next(new Error(error))
+
+        const checkAccess = accessControlHelper(req.params.token)
+
+        if (!checkAccess.accessTable.createGroup) {      
+            return next(new restifyErrors.UnauthorizedError('Please contact admin'))
+        }
+
+        resourceFunctions.find(req.params.id)
+        .then((resource) => {
+            if (resource.OwnerId != checkAccess.payload.id) {
+                return next(new restifyErrors.UnauthorizedError('You are not authorized to access this resource'))
+            }
+            resourceFunctions.delete(req.params.id)
+            .then(() => {
+                res.json({status: true, message: 'Successfully deleted'})
+                next()
+            })
+            .catch((error) => {
+                return next(new restifyErrors.InternalServerError(error))
+            })
         })
     }
 }

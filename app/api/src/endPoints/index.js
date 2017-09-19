@@ -5,9 +5,11 @@ module.exports = (userFunctions, resourceFunctions, groupFunctions, courseFuncti
         displayUser: require('./displayUser.js')(userFunctions),
 
         displayResource: require('./displayResource.js')(resourceFunctions),
-        createGroup: require('./createGroup.js')(groupFunctions, accessControlHelper, restifyErrors),
-        createCourse: require('./createCourse.js')(courseFunctions, accessControlHelper, restifyErrors),
+        createGroup: require('./createGroup.js')(groupFunctions, resourceFunctions, accessControlHelper, restifyErrors),
+        createCourse: require('./createCourse.js')(courseFunctions, resourceFunctions, accessControlHelper, restifyErrors),
 
+        updateResource: require('./updateResource.js')(resourceFunctions, accessControlHelper, restifyErrors),
+        deleteResource: require('./deleteResource.js')(resourceFunctions, accessControlHelper, restifyErrors),
     }
 }
 
@@ -16,6 +18,3 @@ module.exports = (userFunctions, resourceFunctions, groupFunctions, courseFuncti
 // chooseCourse: require('./chooseCourse.js')(),
 // displayCourses: require('./displayCourses.js')(),
 // displayGroups: require('./displayGroups.js')(),
-
-// updateResource: require('./updateResource.js')(resourceFunctions, accessControlHelper),
-// deleteResource: require('./deleteResource.js')(resourceFunctions, accessControlHelper),
