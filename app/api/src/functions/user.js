@@ -54,11 +54,14 @@ module.exports = (Resource, User) => {
 			})
 		},
 
-        addAcceptant: (resourceId, userId) => {
-			return Resource.findById(resourceId)
-			.then((resource) => {
+        addAcceptant: (courseId, userId) => {
+			return Resource.findById(courseId)
+			.then((course) => {
+				if (course.dataValues.type != 'course') {
+					throw new Error('Course Id does not belong to a course')
+				}
 				return User.findById(userId).then((user) => {
-					return user.addAcceptant(resource)
+					return user.addAcceptant(course)
 				})
 			})
 		},

@@ -1,4 +1,4 @@
-var rootPath = '/home/altair/Prog/courseApp/app/testing/make-scratch'
+var rootPath = '/home/altair/Prog/courseApp/app/api'
 
 module.exports = {
 	host: 'localhost',

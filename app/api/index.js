@@ -10,17 +10,17 @@ const Resource = require(rootPath + '/src/models/Resource.js')(connection, Seque
 
 Resource.belongsTo(User, { as: 'Owner' });
 
-Resource.belongsToMany(User, {through: 'ResourceUser'});
-User.belongsToMany(Resource, {through: 'ResourceUser'});
+Resource.belongsToMany(User, {through: 'groupUser', as: 'Groups', foreignKey: 'GroupId'});
+User.belongsToMany(Resource, {through: 'groupUser', as: 'Users', foreignKey: 'UserId'});
 
-Resource.belongsToMany(User, {through: 'AcceptanceUser', as: 'Acceptants'});
-User.belongsToMany(Resource, {through: 'AcceptanceUser', as: 'Acceptors'});
+Resource.belongsToMany(User, {through: 'acceptanceUser', as: 'Acceptants', foreignKey: 'AcceptantId'});
+User.belongsToMany(Resource, {through: 'acceptanceUser', as: 'Acceptors', foreignKey: 'AcceptorId'});
 
-Resource.belongsToMany(Resource, {through: 'ResourceResource', as: "ResourceItems"});
+Resource.belongsToMany(Resource, {through: 'groupCourse', as: 'GroupCourses'});
 
 var userFunctions = require(rootPath + '/src/functions/user.js')(Resource, User)
 var resourceFunctions = require(rootPath + '/src/functions/resource.js')(Resource, User)
-var groupFunctions = require(rootPath + '/src/functions/group.js')(Resource)
+var groupFunctions = require(rootPath + '/src/functions/group.js')(Resource, User)
 var courseFunctions = require(rootPath + '/src/functions/course.js')(Resource)
 
 var jwtHelper = require(rootPath + '/helpers/jwt.js')(jwt, require(rootPath + '/config/jwt.js'))
@@ -56,21 +56,32 @@ console.log(endPoints)
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
-userFunctions.create('Adithya owner', 'a@b.com')
-.then((user) => {
-    jwtHelper.encode({id: user.id, type: 3, name: user.name}, (error, token) => {
-        if (error) {
-            console.log('Error')
-        }else{
-            console.log(token)
-        }
-    })
-})
-
 
 
 connection.sync()
 .then(() => {
+
+    userFunctions.create('Adithya owner', 'a@bkskks.com')
+    .then((user) => {
+        jwtHelper.encode({id: user.id, type: 3, name: user.name}, (error, token) => {
+            if (error) {
+                console.log('Error')
+            }else{
+                console.log(token)
+            }
+        })
+    })
+    
+    userFunctions.create('Adithya owner', 'a@b.com')
+    .then((user) => {
+        jwtHelper.encode({id: user.id, type: 3, name: user.name}, (error, token) => {
+            if (error) {
+                console.log('Error')
+            }else{
+                console.log(token)
+            }
+        })
+    })
 
     endPointsHelper.forEach((value) => {
         console.log(value)

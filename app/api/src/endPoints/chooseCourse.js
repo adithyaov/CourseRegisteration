@@ -3,7 +3,7 @@ module.exports = (userFunctions, resourceFunctions, accessControlHelper, restify
 
         const checkAccess = accessControlHelper(req.params.token)
 
-        if (!checkAccess.accessTable.createGroup) {      
+        if (!checkAccess.accessTable.createGroup) {
             return next(new restifyErrors.UnauthorizedError('Please contact admin'))
         }
         
