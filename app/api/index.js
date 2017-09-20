@@ -56,7 +56,7 @@ var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfi
 
 
 
-connection.sync({force: true})
+connection.sync()
 .then(() => {
 
     userFunctions.create('Adithya owner', 'a@bkskks.com')

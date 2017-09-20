@@ -15,7 +15,7 @@ module.exports = (Resource, User) => {
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
@@ -26,7 +26,7 @@ module.exports = (Resource, User) => {
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
@@ -35,7 +35,7 @@ module.exports = (Resource, User) => {
 				return user.destroy()
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
@@ -51,15 +51,15 @@ module.exports = (Resource, User) => {
 						return resources
 					})
 					.catch((error) => {
-						return new Error(error)
+						throw new Error(error)
 					})
 				})
 				.catch((error) => {
-					return new Error(error)
+					throw new Error(error)
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
         
@@ -70,11 +70,11 @@ module.exports = (Resource, User) => {
 					return user.addResource(resource)
 				})
 				.catch((error) => {
-					return new Error(error)
+					throw new Error(error)
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
@@ -88,11 +88,11 @@ module.exports = (Resource, User) => {
 					return user.addAcceptant(course)
 				})
 				.catch((error) => {
-					return new Error(error)
+					throw new Error(error)
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 

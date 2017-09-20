@@ -17,7 +17,7 @@ module.exports = (Resource) => {
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		}
 

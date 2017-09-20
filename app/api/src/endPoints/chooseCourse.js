@@ -9,9 +9,12 @@ module.exports = (userFunctions, resourceFunctions, accessControlHelper, restify
         
         
         resourceFunctions.find(req.params.courseId).then((course) => {
-            userFunctions.addAcceptant(course.id, req.params.userId).then(() => {
+            return userFunctions.addAcceptant(course.id, req.params.userId).then(() => {
                 res.json({status: true, message: 'Course joined'})
                 return next()
+            })
+            .catch((error) => {
+                return next(new restifyErrors.InternalServerError(error))
             })
         })
         .catch((error) => {

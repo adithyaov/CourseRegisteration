@@ -17,7 +17,7 @@ module.exports = (Resource, User) => {
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
@@ -34,15 +34,15 @@ module.exports = (Resource, User) => {
 						return users
 					})
 					.catch((error) => {
-						return new Error(error)
+						throw new Error(error)
 					})
 				})
 				.catch((error) => {
-					return new Error(error)
+					throw new Error(error)
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
@@ -56,21 +56,21 @@ module.exports = (Resource, User) => {
 			.then((courses) => {
 				return Resource.findById(groupId).then((group) => {
                     if (group.dataValues.type != 'group') {
-                        throw new Error('Group Id does not belong to a group')
+                        throw new Error('Group with id ' + groupId + ' does not exist')
                     }
 					return group.setGroupCourses(courses).then((statusCourses) => {
 						return statusCourses
 					})
 					.catch((error) => {
-						return new Error(error)
+						throw new Error(error)
 					})
 				})
 				.catch((error) => {
-					return new Error(error)
+					throw new Error(error)
 				})
 			})
 			.catch((error) => {
-				return new Error(error)
+				throw new Error(error)
 			})
 		},
 
