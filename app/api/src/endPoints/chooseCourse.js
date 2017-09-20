@@ -1,4 +1,4 @@
-module.exports = (userFunctions, accessControlHelper, restifyErrors) => {
+module.exports = (userFunctions, resourceFunctions, accessControlHelper, restifyErrors) => {
     return (req, res, next) => {
 
         const checkAccess = accessControlHelper(req.params.token)
@@ -7,10 +7,16 @@ module.exports = (userFunctions, accessControlHelper, restifyErrors) => {
             return next(new restifyErrors.UnauthorizedError('Please contact admin'))
         }
         
-        userFunctions.addResources(req.params.courseIds, checkAccess.payload.id)
-        .then((resources) => {
-            res.json({status: true, message: 'Added courses', currentCourses: resources})
-            return next()
+        
+        resourceFunctions.find(req.params.courseId).then((course) => {
+            resourceFunctions.findOrCreate({code: course.code, type: 'acceptance'},
+                                           {name: course.name, code: 'a_' + course.code, meta: course.meta, type: 'acceptance'})
+            .then((acceptance) => {
+                userFunctions.addResource(acceptance.id, req.params.userId).then(() => {
+                    res.json({status: true, message: 'Course joined'})
+                    return next()
+                })
+            })
         })
         .catch((error) => {
             return next(new restifyErrors.InternalServerError(error))

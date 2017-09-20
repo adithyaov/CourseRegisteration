@@ -47,15 +47,18 @@ module.exports = (Resource, User) => {
 			})
 		},
 
-		addResources: (addIds, toId) => {
+		addResources: (addIds, toId, addIdsType='course', toIdType='group') => {
 			return Resource.findAll({
 			  where: {
 				id: addIds,
-				type: 'course'
+				type: addIdsType
 			  }
 			})
 			.then((resources) => {
 				return Resource.findById(toId).then((group) => {
+                    if (group.dataValues.type != toIdType) {
+                        throw new Error('Resource Id does not belong to a group')
+                    }
 					return group.setResourceItems(resources).then((courses) => {
 						return courses
 					})
@@ -76,7 +79,23 @@ module.exports = (Resource, User) => {
 					})
 				})
 			})
+		},
+        
+        
+        findOrCreate: (where, defaults) => {
+            console.log(where)
+            console.log(defaults)
+			return Resource.findOrCreate({
+                where: where,
+                defaults: defaults
+			})
+			.spread((resource, created) => {
+				return resource.get({
+					plain: true
+				})
+			})
 		}
+        
 
 	}
 

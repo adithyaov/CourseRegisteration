@@ -43,7 +43,16 @@ module.exports = (Resource, User) => {
 					})
 				})
 			})
-		}
+		},
+        
+        addResource: (resourceId, userId) => {
+			return Resource.findById(resourceId)
+			.then((resource) => {
+				return User.findById(userId).then((user) => {
+					return user.addResource(resource)
+				})
+			})
+		},
 
 	}
 
