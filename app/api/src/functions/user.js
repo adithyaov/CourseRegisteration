@@ -97,10 +97,13 @@ module.exports = (Resource, User) => {
 		},
 
 		getAllCourses: (userId) => {
+			console.log(userId)
 			return User.findById(userId).then((user) => {
 				return user.getGroups().then((groups) => {
 					var allCourses = []
+					console.log(groups)
 					groups.forEach((g) => {
+						console.log(g)
 						g.getCourses().then((courses) => {
 							courses.forEach((c) => {
 								allCourses.push(c.get({plain: true}))

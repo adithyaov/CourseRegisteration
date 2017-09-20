@@ -1,8 +1,8 @@
 module.exports = (userFunctions) => {
     return (req, res, next) => {
-        userFunctions.getAllCourses(req.params.userId)
+        userFunctions.getAllCourses(req.params.id)
         .then((all) => {
-            userFunctions.getAcceptedCourses(req.params.userId)
+            userFunctions.getAcceptedCourses(req.params.id)
             .then((accepted) => {
                 res.json({status: true, all: all, accepted: accepted})
                 return next()

@@ -1,6 +1,6 @@
 module.exports = (groupFunctions) => {
     return (req, res, next) => {
-        groupFunctions.displayOwnerGroups(req.params.ownerId)
+        groupFunctions.displayOwnerGroups(req.params.id)
         .then((courses) => {
             res.json({status: true, courses: courses})
             return next()

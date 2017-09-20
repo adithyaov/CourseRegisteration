@@ -21,7 +21,7 @@ module.exports = (Resource) => {
 			})
 		},
 
-		displayOwnersCourses: (ownerId) => {
+		displayOwnerCourses: (ownerId) => {
 			return Resource.findAll({
 				where: {
 					OwnerId: ownerId,
