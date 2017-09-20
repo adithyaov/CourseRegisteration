@@ -19,6 +19,18 @@ module.exports = (Resource) => {
 			.catch((error) => {
 				throw new Error(error)
 			})
+		},
+
+		displayOwnersCourses: (ownerId) => {
+			return Resource.findAll({
+				where: {
+					OwnerId: ownerId,
+					type: 'course'
+				}
+			})
+			.catch((error) => {
+				throw new Error(error)
+			})
 		}
 
 	}

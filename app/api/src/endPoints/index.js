@@ -17,8 +17,8 @@ module.exports = (userFunctions, resourceFunctions, groupFunctions, courseFuncti
         addCoursesToGroup: require('./addCoursesToGroup.js')(resourceFunctions, groupFunctions, accessControlHelper, restifyErrors),
 
         displayUserCourses: () => {},
-        displayOwnerCourses: () => {},
-        displayOwnerGroups: () => {}
+        displayOwnerCourses: require('./displayOwnerCourses.js')(courseFunctions),
+        displayOwnerGroups: require('./displayOwnerGroups.js')(groupFunctions),
 
     }
 }

@@ -74,6 +74,18 @@ module.exports = (Resource, User) => {
 			})
 		},
 
+		displayOwnerGroups: (ownerId) => {
+			return Resource.findAll({
+				where: {
+					OwnerId: ownerId,
+					type: 'group'
+				}
+			})
+			.catch((error) => {
+				throw new Error(error)
+			})
+		}
+
 	}
 
 }
