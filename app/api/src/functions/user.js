@@ -54,6 +54,53 @@ module.exports = (Resource, User) => {
 			})
 		},
 
+        addAcceptant: (resourceId, userId) => {
+			return Resource.findById(resourceId)
+			.then((resource) => {
+				return User.findById(userId).then((user) => {
+					return user.addAcceptant(resource)
+				})
+			})
+		},
+
+		// userAcceptance: (userId, courseCode) => {
+		// 	return User.findById(userId).then((user) => {
+		// 		return user.getResources({
+		// 			where: {
+		// 				code: 'a_' + courseCode,
+		// 				type: 'acceptance'
+		// 			}
+		// 		})
+		// 		.then((acceptanceArray) => {
+		// 			if (acceptanceArray.length == 1){
+		// 				return true
+		// 			} else {
+		// 				return false
+		// 			}
+		// 		})
+		// 	})
+		// },
+
+		// displayUserCourses: (userId) => {
+		// 	User.findById(userId).then((user) => {
+		// 		user.getResources({
+		// 			where: {
+		// 				type: 'course'
+		// 			}
+		// 		})
+		// 		.then((courses) => {
+		// 			user.getResources({
+		// 				where: {
+		// 					type: 'acceptance'
+		// 				}
+		// 			})
+		// 			.then((acceptances) => {
+
+		// 			})
+		// 		})
+		// 	})
+		// }
+
 	}
 
 

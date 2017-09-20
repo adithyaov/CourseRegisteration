@@ -9,8 +9,13 @@ const User = require(rootPath + '/src/models/User.js')(connection, Sequelize)
 const Resource = require(rootPath + '/src/models/Resource.js')(connection, Sequelize)
 
 Resource.belongsTo(User, { as: 'Owner' });
+
 Resource.belongsToMany(User, {through: 'ResourceUser'});
 User.belongsToMany(Resource, {through: 'ResourceUser'});
+
+Resource.belongsToMany(User, {through: 'AcceptanceUser', as: 'Acceptants'});
+User.belongsToMany(Resource, {through: 'AcceptanceUser', as: 'Acceptors'});
+
 Resource.belongsToMany(Resource, {through: 'ResourceResource', as: "ResourceItems"});
 
 var userFunctions = require(rootPath + '/src/functions/user.js')(Resource, User)

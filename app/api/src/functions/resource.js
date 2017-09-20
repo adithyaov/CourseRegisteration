@@ -49,10 +49,10 @@ module.exports = (Resource, User) => {
 
 		addResources: (addIds, toId, addIdsType='course', toIdType='group') => {
 			return Resource.findAll({
-			  where: {
-				id: addIds,
-				type: addIdsType
-			  }
+				where: {
+					id: addIds,
+					type: addIdsType
+				}
 			})
 			.then((resources) => {
 				return Resource.findById(toId).then((group) => {
@@ -68,9 +68,9 @@ module.exports = (Resource, User) => {
 
 		addUsers: (userIds, resourceId) => {
 			return User.findAll({
-			  where: {
-			    id: userIds
-			  }
+				where: {
+					id: userIds
+				}
 			})
 			.then((users) => {
 				return Resource.findById(resourceId).then((resource) => {
@@ -80,8 +80,8 @@ module.exports = (Resource, User) => {
 				})
 			})
 		},
-        
-        
+
+
         findOrCreate: (where, defaults) => {
             console.log(where)
             console.log(defaults)
@@ -95,7 +95,7 @@ module.exports = (Resource, User) => {
 				})
 			})
 		}
-        
+
 
 	}
 

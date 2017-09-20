@@ -9,13 +9,9 @@ module.exports = (userFunctions, resourceFunctions, accessControlHelper, restify
         
         
         resourceFunctions.find(req.params.courseId).then((course) => {
-            resourceFunctions.findOrCreate({code: course.code, type: 'acceptance'},
-                                           {name: course.name, code: 'a_' + course.code, meta: course.meta, type: 'acceptance'})
-            .then((acceptance) => {
-                userFunctions.addResource(acceptance.id, req.params.userId).then(() => {
-                    res.json({status: true, message: 'Course joined'})
-                    return next()
-                })
+            userFunctions.addAcceptant(course.id, req.params.userId).then(() => {
+                res.json({status: true, message: 'Course joined'})
+                return next()
             })
         })
         .catch((error) => {
