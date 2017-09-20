@@ -16,6 +16,9 @@ module.exports = (Resource, User) => {
 					plain: true
 				})
 			})
+			.catch((error) => {
+				return new Error(error)
+			})
 		},
 
 		addUsers: (userIds, groupId) => {
@@ -30,7 +33,16 @@ module.exports = (Resource, User) => {
 					return resource.setUsers(userIds).then((users) => {
 						return users
 					})
+					.catch((error) => {
+						return new Error(error)
+					})
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -49,7 +61,16 @@ module.exports = (Resource, User) => {
 					return group.setGroupCourses(courses).then((statusCourses) => {
 						return statusCourses
 					})
+					.catch((error) => {
+						return new Error(error)
+					})
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 

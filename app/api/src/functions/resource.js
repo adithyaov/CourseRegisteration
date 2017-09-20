@@ -8,11 +8,17 @@ module.exports = (Resource, User) => {
 			return Resource.findById(id).then((resource) => {
 				return resource.get({plain: true})
 			})
+			.catch((error) => {
+				return new Error(error)
+			})
 		},
 
 		delete: (id) => {
 			return Resource.findById(id).then((resource) => {
 				return resource.destroy()
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -32,6 +38,12 @@ module.exports = (Resource, User) => {
 					name: name,
 					meta: meta
 				}, {fields: fieldsToUpdate})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -44,6 +56,12 @@ module.exports = (Resource, User) => {
 					resource.setOwner(user)
 					return resource.get({plain: true})
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -62,7 +80,16 @@ module.exports = (Resource, User) => {
 					return group.setResourceItems(resources).then((courses) => {
 						return courses
 					})
+					.catch((error) => {
+						return new Error(error)
+					})
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -77,14 +104,21 @@ module.exports = (Resource, User) => {
 					return resource.setUsers(userIds).then((users) => {
 						return users
 					})
+					.catch((error) => {
+						return new Error(error)
+					})
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
 
         findOrCreate: (where, defaults) => {
-            console.log(where)
-            console.log(defaults)
 			return Resource.findOrCreate({
                 where: where,
                 defaults: defaults
@@ -93,6 +127,9 @@ module.exports = (Resource, User) => {
 				return resource.get({
 					plain: true
 				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		}
 

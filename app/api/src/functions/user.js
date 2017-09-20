@@ -14,6 +14,9 @@ module.exports = (Resource, User) => {
 					plain: true
 				})
 			})
+			.catch((error) => {
+				return new Error(error)
+			})
 		},
 
 		find: (id) => {
@@ -22,11 +25,17 @@ module.exports = (Resource, User) => {
 					plain: true
 				})
 			})
+			.catch((error) => {
+				return new Error(error)
+			})
 		},
 
 		delete: (id) => {
 			return User.findById(id).then(user => {
 				return user.destroy()
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -41,7 +50,16 @@ module.exports = (Resource, User) => {
 					return user.setResources(resources).then((resources) => {
 						return resources
 					})
+					.catch((error) => {
+						return new Error(error)
+					})
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
         
@@ -51,6 +69,12 @@ module.exports = (Resource, User) => {
 				return User.findById(userId).then((user) => {
 					return user.addResource(resource)
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 
@@ -63,6 +87,12 @@ module.exports = (Resource, User) => {
 				return User.findById(userId).then((user) => {
 					return user.addAcceptant(course)
 				})
+				.catch((error) => {
+					return new Error(error)
+				})
+			})
+			.catch((error) => {
+				return new Error(error)
 			})
 		},
 

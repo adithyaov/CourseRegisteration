@@ -10,11 +10,11 @@ const Resource = require(rootPath + '/src/models/Resource.js')(connection, Seque
 
 Resource.belongsTo(User, { as: 'Owner' });
 
-Resource.belongsToMany(User, {through: 'groupUser', as: 'Groups', foreignKey: 'GroupId'});
-User.belongsToMany(Resource, {through: 'groupUser', as: 'Users', foreignKey: 'UserId'});
+Resource.belongsToMany(User, {through: 'groupUser', as: 'Users'});
+User.belongsToMany(Resource, {through: 'groupUser', as: 'Groups'});
 
-Resource.belongsToMany(User, {through: 'acceptanceUser', as: 'Acceptants', foreignKey: 'AcceptantId'});
-User.belongsToMany(Resource, {through: 'acceptanceUser', as: 'Acceptors', foreignKey: 'AcceptorId'});
+Resource.belongsToMany(User, {through: 'acceptanceUser', as: 'Acceptors'});
+User.belongsToMany(Resource, {through: 'acceptanceUser', as: 'Acceptants'});
 
 Resource.belongsToMany(Resource, {through: 'groupCourse', as: 'GroupCourses'});
 
@@ -51,14 +51,12 @@ var restifyErrors = require('restify-errors');
 
 var endPoints = require(rootPath + '/src/endPoints/index.js')(userFunctions, resourceFunctions, groupFunctions, courseFunctions, accessControlHelper, restifyErrors)
 
-console.log(endPoints)
-
 var endPointsConfig = require(rootPath + '/config/endPoints.js')
 var endPointsHelper = require(rootPath + '/helpers/endPoints.js')(endPointsConfig, endPoints)
 
 
 
-connection.sync()
+connection.sync({force: true})
 .then(() => {
 
     userFunctions.create('Adithya owner', 'a@bkskks.com')
