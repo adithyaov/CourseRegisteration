@@ -16,7 +16,7 @@ User.belongsToMany(Resource, {through: 'groupUser', as: 'Groups'});
 Resource.belongsToMany(User, {through: 'acceptanceUser', as: 'Acceptors'});
 User.belongsToMany(Resource, {through: 'acceptanceUser', as: 'Acceptants'});
 
-Resource.belongsToMany(Resource, {through: 'groupCourse', as: 'GroupCourses'});
+Resource.belongsToMany(Resource, {through: 'groupCourse', as: 'Courses'});
 
 var userFunctions = require(rootPath + '/src/functions/user.js')(Resource, User)
 var resourceFunctions = require(rootPath + '/src/functions/resource.js')(Resource, User)

@@ -96,43 +96,44 @@ module.exports = (Resource, User) => {
 			})
 		},
 
-		// userAcceptance: (userId, courseCode) => {
-		// 	return User.findById(userId).then((user) => {
-		// 		return user.getResources({
-		// 			where: {
-		// 				code: 'a_' + courseCode,
-		// 				type: 'acceptance'
-		// 			}
-		// 		})
-		// 		.then((acceptanceArray) => {
-		// 			if (acceptanceArray.length == 1){
-		// 				return true
-		// 			} else {
-		// 				return false
-		// 			}
-		// 		})
-		// 	})
-		// },
+		getAllCourses: (userId) => {
+			return User.findById(userId).then((user) => {
+				return user.getGroups().then((groups) => {
+					var allCourses = []
+					groups.forEach((g) => {
+						g.getCourses().then((courses) => {
+							courses.forEach((c) => {
+								allCourses.push(c.get({plain: true}))
+							}, this);
+						})
+						.catch((error) => {
+							throw new Error(error)
+						})
+					}, this);
+					return allCourses
+				})
+				.catch((error) => {
+					throw new Error(error)
+				})
+			})
+			.catch((error) => {
+				throw new Error(error)
+			})
+		},
 
-		// displayUserCourses: (userId) => {
-		// 	User.findById(userId).then((user) => {
-		// 		user.getResources({
-		// 			where: {
-		// 				type: 'course'
-		// 			}
-		// 		})
-		// 		.then((courses) => {
-		// 			user.getResources({
-		// 				where: {
-		// 					type: 'acceptance'
-		// 				}
-		// 			})
-		// 			.then((acceptances) => {
-
-		// 			})
-		// 		})
-		// 	})
-		// }
+		getAcceptedCourses: (userId) => {
+			return User.findById(userId).then((user) => {
+				return user.getAcceptants().then((courses) => {
+					return courses
+				})
+				.catch((error) => {
+					throw new Error(error)
+				})
+			})
+			.catch((error) => {
+				throw new Error(error)
+			})
+		}
 
 	}
 

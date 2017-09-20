@@ -58,7 +58,7 @@ module.exports = (Resource, User) => {
                     if (group.dataValues.type != 'group') {
                         throw new Error('Group with id ' + groupId + ' does not exist')
                     }
-					return group.setGroupCourses(courses).then((statusCourses) => {
+					return group.setCourses(courses).then((statusCourses) => {
 						return statusCourses
 					})
 					.catch((error) => {
