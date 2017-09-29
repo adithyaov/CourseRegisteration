@@ -41,9 +41,9 @@ module.exports = (Resource, User) => {
 
 		addResources: (resourceIds, userId) => {
 			return Resource.findAll({
-			  where: {
-			    id: resourceIds
-			  }
+				where: {
+					id: resourceIds
+				}
 			})
 			.then((resources) => {
 				return User.findById(userId).then((user) => {
@@ -104,7 +104,9 @@ module.exports = (Resource, User) => {
 					console.log(groups)
 					groups.forEach((g) => {
 						console.log(g)
-						g.getCourses().then((courses) => {
+						g.getCourses({
+							attributes: ['id', 'name', 'code', 'meta'],
+						}).then((courses) => {
 							courses.forEach((c) => {
 								allCourses.push(c.get({plain: true}))
 							}, this);
@@ -126,7 +128,9 @@ module.exports = (Resource, User) => {
 
 		getAcceptedCourses: (userId) => {
 			return User.findById(userId).then((user) => {
-				return user.getAcceptants().then((courses) => {
+				return user.getAcceptants({
+					attributes: ['id', 'name', 'code', 'meta'],
+				}).then((courses) => {
 					return courses
 				})
 				.catch((error) => {

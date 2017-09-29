@@ -23,10 +23,14 @@ module.exports = (Resource) => {
 
 		displayOwnerCourses: (ownerId) => {
 			return Resource.findAll({
+				attributes: ['id', 'name', 'code', 'meta'],
 				where: {
 					OwnerId: ownerId,
 					type: 'course'
 				}
+			})
+			.then((resources) => {
+				return resources
 			})
 			.catch((error) => {
 				throw new Error(error)

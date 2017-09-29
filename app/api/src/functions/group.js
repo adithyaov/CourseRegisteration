@@ -76,10 +76,14 @@ module.exports = (Resource, User) => {
 
 		displayOwnerGroups: (ownerId) => {
 			return Resource.findAll({
+				attributes: ['id', 'name', 'code', 'meta'],
 				where: {
 					OwnerId: ownerId,
 					type: 'group'
 				}
+			})
+			.then((resources) => {
+				return resources
 			})
 			.catch((error) => {
 				throw new Error(error)
