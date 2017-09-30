@@ -1,0 +1,39 @@
+<form method="post" style="max-width: 600px;" action="/course/create">
+  <input type="text" name="name" placeholder="Course name? eg. Machine Learning"/>
+  <input type="text" name="code" placeholder="Course code? eg. CS5170"/>
+  <input type="text" name="credits" placeholder="Credits? ed. 4"/>
+  <input type="text" name="instructor" placeholder="Instructor name? eg. Dr. John Doe"/>
+  <input type="text" name="contact" placeholder="Contact email? eg. john@doe.com or machine.learning@iitpkd.ac.in"/>
+  <input type="submit" value="Create">
+  <input type="hidden" value="<%= _csrf %>" name="_csrf"/>
+</form>
+
+<br/>
+
+<% if (courses && courses.length > 0) { %>
+  <div class="cards">
+    <% courses.forEach(function (course) { %>
+      <div class="card" style="position: relative;">
+        <a style="position: absolute; top: 1rem; right:2rem;" href="/course/edit/<%= course.id %>">Edit</a>
+        <h5 class="card-header"><%= course.code %></h5>
+        <p class="card-body">
+          <b>Name</b>: <%= course.name %>
+          <br />
+          <b>Instructor</b>: <%= course.instructor %>
+          <br />
+          <b>Credits</b>: <%= course.credits %>
+          <br />
+          <b>Contact</b>: <%= course.contact %>
+        </p>
+        <div class="card-footer right">
+
+          <form method="post" action="/course/delete/<%= course.id %>" style="padding:0; margin-right: 2rem;">
+            <input class="link" type="submit" value="Delete">
+            <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+          </form>
+
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>

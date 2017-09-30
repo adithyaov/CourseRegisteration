@@ -28,6 +28,13 @@ module.exports.policies = {
 
   // '*': true,
 
+  CourseController: {
+    'create': 'checkOwner',
+    'new': 'checkOwner',
+    'edit': ['checkOwner', 'checkCourseOwner'],
+    'delete': ['checkOwner', 'checkCourseOwner'],
+  }
+
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *

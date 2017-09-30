@@ -1,0 +1,8 @@
+<form method="post" style="max-width: 600px;" action="/course/update/<%= course.id %>">
+  <input type="text" name="name" value="<%= course.name %>"/>
+  <input type="text" name="credits" value="<%= course.credits %>"/>
+  <input type="text" name="instructor" value="<%= course.instructor %>"/>
+  <input type="text" name="contact" value="<%= course.contact %>"/>
+  <input type="submit" value="Update">
+  <input type="hidden" value="<%= _csrf %>" name="_csrf"/>
+</form>
