@@ -1,0 +1,84 @@
+<style>
+  .option {
+    position: absolute;
+    top: 1.5rem;
+    right: 3rem
+  }
+  .card {
+    position: relative!important;
+  }
+</style>
+
+<% if (courses && courses.length > 0) { %>
+  <div id="app"></div>
+<% } %>
+
+
+<script type="text/javascript">
+  const e = React.createElement;
+  const c = React.createClass;
+  var card = c({
+    getInitialState: function() {
+      return {joined: this.props.joined, loading: false};
+    },
+    join: function() {
+      var t = this;
+      t.setState({loading: true});
+      axios.post('/course/join/' + t.props.id, {})
+      .then(function(res) {
+        if (res.error) {alert('Unexpected error.' + res.error); return;}
+        t.setState({loading: false, joined: true});
+      })
+      .catch(function (e) {
+          alert('Unexpected error.' + e);
+      });
+    },
+    leave: function() {
+      var t = this;
+      t.setState({loading: true});
+      axios.post('/course/leave/' + t.props.id, {})
+      .then(function(res) {
+        if (res.error) {alert('Unexpected error.' + res.error); return;}
+        t.setState({loading: false, joined: false});
+      })
+      .catch(function (e) {
+        alert('Unexpected error.' + e);
+      });
+    },
+    render: function() {
+      return (
+        e('div', {className: 'card' + (this.state.joined ? ' card-active' : '')},
+          (this.state.joined ? e('a', {className: 'option', onClick: this.leave}, 'Leave') : e('a', {className: 'option', onClick: this.join}, 'Join')),
+          e('h5', {className: 'card-header'}, this.props.code),
+          e('p', {className: 'card-body'},
+            e('b', null, 'Name'), ' ' + this.props.name, e('br', null),
+            e('b', null, 'Instructor'), ' ' + this.props.instructor, e('br', null),
+            e('b', null, 'Credits'), ' ' + this.props.credits, e('br', null),
+            e('b', null, 'Contact'), ' ' + this.props.contact
+          )
+        )
+      )
+    }
+  })
+  var cards = c({
+    render: function() {
+      var courses = this.props.data.map(function(c) {
+        return e(card, {
+          joined: c.joined,
+          code: c.code,
+          name: c.name,
+          instructor: c.instructor,
+          credits: c.credits,
+          contact: c.contact,
+          id: c.id
+        })
+      })
+      return (e('div', {className: 'cards'}, courses))
+    }
+  })
+
+  ReactDOM.render(
+    e(cards, {data: <%- JSON.stringify(courses) %>}),
+    document.getElementById('app')
+  );
+</script>

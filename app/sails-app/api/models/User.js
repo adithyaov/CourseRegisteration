@@ -30,6 +30,11 @@ module.exports = {
       via: 'userList',
       dominant: true
     },
+    joinedCourses: {
+      collection: 'course',
+      via: 'joinedUsers',
+      dominant: true
+    },
     coursesOwned: {
       collection: 'course',
       via: 'owner'

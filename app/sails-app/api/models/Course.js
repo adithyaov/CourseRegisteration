@@ -36,6 +36,10 @@ module.exports = {
       collection: 'group',
       via: 'courseList'
     },
+    joinedUsers: {
+      collection: 'user',
+      via: 'joinedCourses'
+    },
     owner: {
       model: 'user',
       required: true,

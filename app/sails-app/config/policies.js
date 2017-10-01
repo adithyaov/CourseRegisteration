@@ -33,6 +33,9 @@ module.exports.policies = {
     'new': 'checkOwner',
     'edit': ['checkOwner', 'checkCourseOwner'],
     'delete': ['checkOwner', 'checkCourseOwner'],
+    'list': 'checkUser',
+    'join': 'checkUser',
+    'leave': 'checkUser',
   }
 
   /***************************************************************************
