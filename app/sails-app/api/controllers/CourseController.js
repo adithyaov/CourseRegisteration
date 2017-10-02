@@ -89,8 +89,7 @@ module.exports = {
 			name: req.body.name,
 			credits: req.body.credits,
 			instructor: req.body.instructor,
-			contact: req.body.contact,
-			owner: req.session.user.id
+			contact: req.body.contact
 		}
 		Course.update({id: courseId}, data)
 		.then(() => res.json({}))

@@ -48,6 +48,7 @@
     render: function() {
       return (
         e('div', {className: 'card' + (this.state.joined ? ' card-active' : '')},
+          (this.state.loading) ? e('div', {className: 'loading-div horizontal-align vertical-align'}, '') : '',
           (this.state.joined ? e('a', {className: 'option', onClick: this.leave}, 'Leave') : e('a', {className: 'option', onClick: this.join}, 'Join')),
           e('h5', {className: 'card-header'}, this.props.code),
           e('p', {className: 'card-body'},
