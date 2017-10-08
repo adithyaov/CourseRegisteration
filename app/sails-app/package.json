@@ -25,7 +25,11 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "webpack-d": "webpack -d",
+    "webpack-p": "webpack -p",
+    "cp-bundle": "cp react/build/bundle.js assets/js/dependencies/bundle.js",
+    "go": "npm run webpack-p && npm run cp-bundle && npm run start"
   },
   "main": "app.js",
   "repository": {
@@ -33,5 +37,31 @@
     "url": "git://github.com/altair/sails-app.git"
   },
   "author": "altair",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "browser-sync": "^2.9.6",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-react": "^7.4.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-babel": "^5.2.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-concat-multi": "^1.0.1",
+    "gulp-eslint": "^1.0.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-newer": "^0.5.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^3.0.0",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "webpack": "^3.6.0"
+  }
 }
