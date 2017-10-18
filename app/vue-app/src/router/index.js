@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '../components/Hello'
 import Course from '../components/Course'
+// import 'babel-runtime/core-js/json/stringify';
 
 Vue.use(Router)
 

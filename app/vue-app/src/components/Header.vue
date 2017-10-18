@@ -16,7 +16,6 @@
     props: ['user'],
     name: 'header-component'
   }
-
 </script>
 
 <style scoped>

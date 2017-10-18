@@ -9,7 +9,7 @@
       <div><b>Target:</b> {{target.join(', ')}}</div>
       <div class="options">
         <a v-on:click="changeMode">Edit</a>
-        <a href="">Delete</a>
+        <a v-on:click="deleteCurrent">Delete</a>
       </div>
     </div>
     <div v-if="mode == 'edit'">
@@ -27,21 +27,25 @@
 
 <script>
   export default {
-    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'target'],
+    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'target', 'deleteFromList'],
     name: 'course-card-component',
-    data() {
+    data () {
       return {
         mode: 'view'
-      };
+      }
     },
     methods: {
-      changeMode: function(event) {
-        this.mode = 'edit';
+      changeMode: function (event) {
+        this.mode = 'edit'
       },
-      updateForm: function(event) {
-        event.preventDefault();
-        alert("In submission");
-        this.mode = 'view';
+      updateForm: function (event) {
+        event.preventDefault()
+        alert('In submission')
+        this.mode = 'view'
+      },
+      deleteCurrent: function () {
+        alert('In deleting')
+        this.deleteFromList()
       }
     }
   }

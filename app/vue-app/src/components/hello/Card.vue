@@ -16,26 +16,26 @@
   export default {
     props: ['id', 'name', 'code', 'credits', 'contact', 'instructor'],
     name: 'hello-card-component',
-    data() {
+    data () {
       return {
         status: false
-      };
+      }
     },
     computed: {
-      statusColor: function() {
+      statusColor: function () {
         if (this.status) {
-          return '#2c8898';
+          return '#2c8898'
         } else {
-          return '#c0c0c0';
+          return '#c0c0c0'
         }
       }
     },
     methods: {
-      joinCourse: function(event) {
-        this.status = true;
+      joinCourse: function (event) {
+        this.status = true
       },
-      leaveCourse: function(event) {
-        this.status = false;
+      leaveCourse: function (event) {
+        this.status = false
       }
     }
   }

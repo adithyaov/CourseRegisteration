@@ -38,7 +38,7 @@
           </tr>
           </table>
         </form>
-        <card-component v-for="c in courses()"
+        <card-component v-for="c in courses"
           v-bind:id="c.id"
           v-bind:name="c.name"
           v-bind:code="c.code"
@@ -46,6 +46,7 @@
           v-bind:instructor="c.instructor"
           v-bind:contact="c.contact"
           v-bind:target="c.target"
+          v-bind:deleteFromList="deleteFromList.bind(null, c.id)"
         ></card-component>
       </div>
     </div>
@@ -53,34 +54,44 @@
 </template>
 
 <script>
-  import Card from 'components/course/Card';
+  import Card from './course/Card'
   export default {
     props: ['user'],
     name: 'course-component',
-    data() {
+    beforeMount () {
+      this.getCourses()
+    },
+    data () {
       return {
-        courses: () => {
-          return [
-            {
-              id: 3,
-              name: 'Test',
-              code: 'CS6654',
-              credits: 5,
-              instructor: 'Dr. Sahely',
-              contact: 'sahely@ml.com',
-              target: ['G1', 'G2', 'G3', 'G4']
-            }
-          ];
-        }
-      };
+        courses: [
+          {
+            id: 3,
+            name: 'Test',
+            code: 'CS6654',
+            credits: 5,
+            instructor: 'Dr. Sahely',
+            contact: 'sahely@ml.com',
+            target: ['G1', 'G2', 'G3', 'G4']
+          }
+        ]
+      }
     },
     components: {
       'card-component': Card
     },
     methods: {
-      createForm: function(event) {
-        event.preventDefault();
-        alert("In create");
+      createForm: function (event) {
+        event.preventDefault()
+        alert('In create')
+      },
+      getCourses: function () {
+        alert('Getting Data in Course')
+        // Need to get data
+      },
+      deleteFromList: function (id) {
+        alert('lol')
+        alert('lol')
+        this.courses = this.courses.filter((c) => c.id !== id)
       }
     }
   }
