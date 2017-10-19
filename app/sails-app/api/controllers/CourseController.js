@@ -33,6 +33,17 @@ module.exports = {
 			res.json({error: e})
 		}
 	},
+	'owned': async (req, res) => {
+		try {
+			var authUser = req.session.user
+			var user = await User.findOne({id: authUser.id}).populate('coursesOwned')
+			cIds = user.coursesOwned.map(c => c.id)
+			var courses = await Course.find({id: cIds}).populate('groupList')
+			res.json({courses: courses})
+		} catch (e) {
+			res.json({error: e})
+		}
+	},
 	'join': async (req, res) => {
 		try {
 			var authUser = req.session.user

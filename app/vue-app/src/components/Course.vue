@@ -39,6 +39,7 @@
           </table>
         </form>
         <card-component v-for="c in courses"
+          v-bind:key="c.id"
           v-bind:id="c.id"
           v-bind:name="c.name"
           v-bind:code="c.code"
@@ -55,6 +56,7 @@
 
 <script>
   import Card from './course/Card'
+  const axios = require('axios')
   export default {
     props: ['user'],
     name: 'course-component',
@@ -84,9 +86,25 @@
         event.preventDefault()
         alert('In create')
       },
-      getCourses: function () {
-        alert('Getting Data in Course')
-        // Need to get data
+      getCourses: async function () {
+        try {
+          alert('Getting Data in Courses')
+          var res = await axios.get('/course/owned')
+          var updateWith = res.data.courses.map((c) => {
+            return {
+              id: c.id,
+              name: c.name,
+              code: c.code,
+              instructor: c.instructor,
+              credits: c.credits,
+              contact: c.contact,
+              target: c.groupList.map(g => g.code)
+            }
+          })
+          this.courses = updateWith
+        } catch (e) {
+          alert('Something wrong with the server.')
+        }
       },
       deleteFromList: function (id) {
         alert('lol')

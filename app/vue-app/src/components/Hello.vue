@@ -7,12 +7,14 @@
       </blockquote>
       <div v-if="user">
         <card-component v-for="c in courses"
+          v-bind:key="c.id"
           v-bind:id="c.id"
           v-bind:name="c.name"
           v-bind:code="c.code"
           v-bind:credits="c.credits"
           v-bind:instructor="c.instructor"
           v-bind:contact="c.contact"
+          v-bind:joined="c.joined"
         ></card-component>
       </div>
     </div>
@@ -21,6 +23,7 @@
 
 <script>
   import Card from './hello/Card'
+  import * as axios from 'axios'
   export default {
     props: ['user'],
     name: 'hello-component',
@@ -46,9 +49,14 @@
       'card-component': Card
     },
     methods: {
-      getCourses: function () {
-        alert('Getting Data')
-        // Need to get data
+      getCourses: async function () {
+        try {
+          alert('Getting Data')
+          var res = await axios.get('/course/list')
+          this.courses = res.data.courses
+        } catch (e) {
+          alert('Something wrong with the server.')
+        }
       }
     }
   }

@@ -13,12 +13,13 @@
 </template>
 
 <script>
+  import * as axios from 'axios'
   export default {
-    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor'],
+    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'joined'],
     name: 'hello-card-component',
     data () {
       return {
-        status: false
+        status: this.joined
       }
     },
     computed: {
@@ -31,11 +32,25 @@
       }
     },
     methods: {
-      joinCourse: function (event) {
-        this.status = true
+      joinCourse: async function (event) {
+        try {
+          var res = await axios.post('/course/join/' + this.id, null)
+          if (res.data.joined === true) {
+            this.status = true
+          }
+        } catch (e) {
+          alert('Something wrong with the server.')
+        }
       },
-      leaveCourse: function (event) {
-        this.status = false
+      leaveCourse: async function (event) {
+        try {
+          var res = await axios.post('/course/leave/' + this.id, null)
+          if (res.data.left === true) {
+            this.status = false
+          }
+        } catch (e) {
+          alert('Something wrong with the server.')
+        }
       }
     }
   }
