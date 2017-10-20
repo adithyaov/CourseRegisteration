@@ -53,7 +53,11 @@
         try {
           alert('Getting Data')
           var res = await axios.get('/course/list')
-          this.courses = res.data.courses
+          if (res.data.courses) {
+            this.courses = res.data.courses
+          } else {
+            throw Error('Something wrong with the server.')
+          }
         } catch (e) {
           alert('Something wrong with the server.')
         }

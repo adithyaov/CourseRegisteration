@@ -29,8 +29,8 @@
             <td><input name="instructor" id="instructor" type="text" placeholder="eg. Dr Sahely" /></td>
           </tr>
           <tr>
-            <td><b>Target:</b></td>
-            <td><textarea placeholder="seperated by commas. eg. cs-2015, cs-2016"></textarea></td>
+            <td><b>Target group codes:</b></td>
+            <td><textarea id="groupCodes" placeholder="seperated by commas. eg. cs-2015, cs-2016"></textarea></td>
           </tr>
           <tr>
             <td><input type="submit" value="Create" /></td>
@@ -46,8 +46,9 @@
           v-bind:credits="c.credits"
           v-bind:instructor="c.instructor"
           v-bind:contact="c.contact"
-          v-bind:target="c.target"
+          v-bind:groupCodes="c.groupCodes"
           v-bind:deleteFromList="deleteFromList.bind(null, c.id)"
+          v-bind:updateContent="updateContent"
         ></card-component>
       </div>
     </div>
@@ -73,7 +74,7 @@
             credits: 5,
             instructor: 'Dr. Sahely',
             contact: 'sahely@ml.com',
-            target: ['G1', 'G2', 'G3', 'G4']
+            groupCodes: ['G1', 'G2', 'G3', 'G4']
           }
         ]
       }
@@ -82,15 +83,48 @@
       'card-component': Card
     },
     methods: {
-      createForm: function (event) {
-        event.preventDefault()
-        alert('In create')
+      createForm: async function (event) {
+        try {
+          event.preventDefault()
+          alert('In create')
+          const createFrom = document.querySelector('.create-form')
+          var postData = {
+            name: createFrom.querySelector('#name').value,
+            code: createFrom.querySelector('#code').value,
+            credits: createFrom.querySelector('#credits').value,
+            contact: createFrom.querySelector('#contact').value,
+            instructor: createFrom.querySelector('#instructor').value,
+            groupCodes: createFrom.querySelector('#groupCodes').value
+          }
+          var res = await axios.post('/course/create', postData)
+          if (res.data.course) {
+            createFrom.querySelector('#name').value = ''
+            createFrom.querySelector('#code').value = ''
+            createFrom.querySelector('#credits').value = ''
+            createFrom.querySelector('#contact').value = ''
+            createFrom.querySelector('#instructor').value = ''
+            createFrom.querySelector('#groupCodes').value = ''
+            this.courses.unshift({
+              id: res.data.course.id,
+              name: res.data.course.name,
+              code: res.data.course.code,
+              credits: res.data.course.credits,
+              contact: res.data.course.contact,
+              instructor: res.data.course.instructor,
+              groupCodes: res.data.validGroupCodes
+            })
+          } else {
+            alert('Course could not be created.')
+          }
+        } catch (e) {
+          alert('Something wrong with the server.')
+        }
       },
       getCourses: async function () {
         try {
           alert('Getting Data in Courses')
           var res = await axios.get('/course/owned')
-          var updateWith = res.data.courses.map((c) => {
+          var dataCourses = res.data.courses.map((c) => {
             return {
               id: c.id,
               name: c.name,
@@ -98,18 +132,35 @@
               instructor: c.instructor,
               credits: c.credits,
               contact: c.contact,
-              target: c.groupList.map(g => g.code)
+              groupCodes: c.groupList.map(g => g.code)
             }
           })
-          this.courses = updateWith
+          this.courses = dataCourses
         } catch (e) {
           alert('Something wrong with the server.')
         }
       },
       deleteFromList: function (id) {
-        alert('lol')
-        alert('lol')
+        alert('in Delete')
         this.courses = this.courses.filter((c) => c.id !== id)
+      },
+      updateContent: function (id, name, instructor, credits, contact, groupCodes) {
+        alert('in Update')
+        this.courses = this.courses.map(c => {
+          if (c.id === id) {
+            return {
+              id: c.id,
+              name: name,
+              code: c.code,
+              instructor: instructor,
+              credits: credits,
+              contact: contact,
+              groupCodes: groupCodes
+            }
+          } else {
+            return c
+          }
+        })
       }
     }
   }

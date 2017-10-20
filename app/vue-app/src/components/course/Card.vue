@@ -6,19 +6,19 @@
       <div><b>Credits:</b> {{credits}}</div>
       <div><b>Contact:</b> {{contact}}</div>
       <div><b>Instructor:</b> {{instructor}}</div>
-      <div><b>Target:</b> {{target.join(', ')}}</div>
+      <div><b>Target:</b> {{groupCodes.join(', ')}}</div>
       <div class="options">
         <a v-on:click="changeMode">Edit</a>
         <a v-on:click="deleteCurrent">Delete</a>
       </div>
     </div>
     <div v-if="mode == 'edit'">
-      <form v-on:submit="updateForm">
-        <div><b>Name:</b> <br /> <input name="name" type="text" :value="name" /></div>
-        <div><b>Credits:</b> <br /> <input name="credits" type="text" :value="credits" /></div>
-        <div><b>Contact:</b> <br /> <input name="contact" type="text" :value="contact" /></div>
-        <div><b>Instructor:</b> <br /> <input name="instructor" type="text" :value="instructor" /></div>
-        <div><b>Target:</b> <br /> <textarea name="instructor">{{target.join(', ')}}</textarea></div>
+      <form v-on:submit="updateForm" class="update-form">
+        <div><b>Name:</b> <br /> <input id="name" name="name" type="text" :value="name" /></div>
+        <div><b>Credits:</b> <br /> <input id="credits" name="credits" type="text" :value="credits" /></div>
+        <div><b>Contact:</b> <br /> <input id="contact" name="contact" type="text" :value="contact" /></div>
+        <div><b>Instructor:</b> <br /> <input id="instructor" name="instructor" type="text" :value="instructor" /></div>
+        <div><b>Target:</b> <br /> <textarea id="groupCodes" name="groupCodes">{{groupCodes.join(', ')}}</textarea></div>
         <div><input type="submit" value="Update" /></div>
       </form>
     </div>
@@ -26,8 +26,9 @@
 </template>
 
 <script>
+  import * as axios from 'axios'
   export default {
-    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'target', 'deleteFromList'],
+    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'groupCodes', 'deleteFromList', 'updateContent'],
     name: 'course-card-component',
     data () {
       return {
@@ -38,14 +39,46 @@
       changeMode: function (event) {
         this.mode = 'edit'
       },
-      updateForm: function (event) {
-        event.preventDefault()
-        alert('In submission')
-        this.mode = 'view'
+      updateForm: async function (event) {
+        try {
+          event.preventDefault()
+          alert('In submission')
+          const updateFrom = document.querySelector('.update-form')
+          var postData = {
+            name: updateFrom.querySelector('#name').value,
+            credits: updateFrom.querySelector('#credits').value,
+            contact: updateFrom.querySelector('#contact').value,
+            instructor: updateFrom.querySelector('#instructor').value,
+            groupCodes: updateFrom.querySelector('#groupCodes').value
+          }
+          alert(JSON.stringify(postData))
+          var res = await axios.post('/course/update/' + this.id, postData)
+          alert(JSON.stringify(res))
+          if (res.data.updated) {
+            this.updateContent(this.id,
+              postData.name, postData.instructor,
+              postData.credits, postData.contact,
+              res.data.validGroupCodes)
+            this.mode = 'view'
+          } else {
+            throw Error('Update was not possible.')
+          }
+        } catch (e) {
+          alert('Update was not possible.')
+        }
       },
-      deleteCurrent: function () {
-        alert('In deleting')
-        this.deleteFromList()
+      deleteCurrent: async function () {
+        try {
+          alert('In deleting')
+          var res = await axios.post('/course/delete/' + this.id, null)
+          if (res.data.deleted) {
+            this.deleteFromList()
+          } else {
+            throw Error('Delete was not possible.')
+          }
+        } catch (e) {
+          alert('Delete was not possible.')
+        }
       }
     }
   }
