@@ -21,6 +21,9 @@
         <div><b>Target:</b> <br /> <textarea id="groupCodes" name="groupCodes">{{groupCodes.join(', ')}}</textarea></div>
         <div><input type="submit" value="Update" /></div>
       </form>
+      <div class="options">
+        <a v-on:click="changeModeToView">Close</a>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +39,9 @@
       }
     },
     methods: {
+      changeModeToView: function (event) {
+        this.mode = 'view'
+      },
       changeMode: function (event) {
         this.mode = 'edit'
       },

@@ -26,7 +26,7 @@ module.exports = {
 				owner: req.session.user.id
 			}
 			var group = await Group.create(data)
-			var userEmails = req.body.users.split(',')
+			var userEmails = req.body.userEmails.split(',')
 																		 .map(x => x.trim())
 																		 .filter(x => x.length > 0)
 			var validUsers = await User.find({email: userEmails})

@@ -50,9 +50,9 @@
   import * as axios from 'axios'
   export default {
     props: ['user'],
-    name: 'course-component',
+    name: 'group-component',
     beforeMount () {
-      this.getCourses()
+      this.getGroups()
     },
     data () {
       return {
@@ -72,9 +72,37 @@
     },
     methods: {
       createForm: async function (event) {
-        alert('In create')
+        try {
+          event.preventDefault()
+          alert('In create')
+          const createFrom = document.querySelector('.create-form')
+          var postData = {
+            name: createFrom.querySelector('#name').value,
+            code: createFrom.querySelector('#code').value,
+            contact: createFrom.querySelector('#contact').value,
+            userEmails: createFrom.querySelector('#userEmails').value
+          }
+          var res = await axios.post('/group/create', postData)
+          if (res.data.group) {
+            createFrom.querySelector('#name').value = ''
+            createFrom.querySelector('#code').value = ''
+            createFrom.querySelector('#contact').value = ''
+            createFrom.querySelector('#userEmails').value = ''
+            this.groups.unshift({
+              id: res.data.group.id,
+              name: res.data.group.name,
+              code: res.data.group.code,
+              contact: res.data.group.contact,
+              userEmails: res.data.validUserEmails
+            })
+          } else {
+            alert('Group could not be created.')
+          }
+        } catch (e) {
+          alert('Something wrong with the server.')
+        }
       },
-      getCourses: async function () {
+      getGroups: async function () {
         try {
           alert('Getting Data in Groups')
           var res = await axios.get('/group/owned')

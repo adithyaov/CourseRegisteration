@@ -1,9 +1,9 @@
 <template>
   <div>
     <ul class="nav">
-      <li class="left"><a>Home</a></li>
-      <li class="left" v-if="user"><a>Courses</a></li>
-      <li class="left" v-if="user"><a>Groups</a></li>
+      <li class="left"><router-link :to="{ path: '/' }">Home</router-link></li>
+      <li class="left" v-if="user"><router-link :to="{ path: '/course' }">Courses</router-link></li>
+      <li class="left" v-if="user"><a><router-link :to="{ path: '/group' }">Groups</router-link></a></li>
       <li class="left"><a>Contact</a></li>
       <li class="right" v-if="user"><a>Logout</a></li>
       <li class="right" v-else="user"><a>Login</a></li>
