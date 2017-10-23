@@ -62,7 +62,9 @@
     props: ['user'],
     name: 'course-component',
     beforeMount () {
-      this.getCourses()
+      if (this.user) {
+        this.getCourses()
+      }
     },
     data () {
       return {

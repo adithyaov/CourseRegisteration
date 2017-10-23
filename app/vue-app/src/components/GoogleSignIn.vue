@@ -1,0 +1,24 @@
+<template>
+  <a ref="signinBtn" class="btn-sign-in">Sign In</a>
+</template>
+
+<script>
+  export default {
+    name: 'g-signin-button',
+    mounted () {
+      window.gapi.load('auth2', () => {
+        const auth2 = window.gapi.auth2.init({
+          client_id: '578466896799-k9k6ugjrb3rncqsg8jbfcpeoar8bgndl.apps.googleusercontent.com',
+          cookiepolicy: 'single_host_origin'
+        })
+        auth2.attachClickHandler(this.$refs.signinBtn, {}, googleUser => {
+          this.$emit('done', googleUser)
+        }, error => console.log(error))
+      })
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>

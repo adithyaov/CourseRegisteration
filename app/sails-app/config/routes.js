@@ -34,7 +34,9 @@ module.exports.routes = {
 
   '/default': {
     view: 'homepage'
-  }
+  },
+
+  '/user/authenticate/:token': 'UserController.authenticate'
 
   /***************************************************************************
   *                                                                          *

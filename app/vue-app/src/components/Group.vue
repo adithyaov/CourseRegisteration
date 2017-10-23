@@ -52,7 +52,9 @@
     props: ['user'],
     name: 'group-component',
     beforeMount () {
-      this.getGroups()
+      if (this.user) {
+        this.getGroups()
+      }
     },
     data () {
       return {

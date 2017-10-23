@@ -16,7 +16,7 @@
   import * as axios from 'axios'
   export default {
     props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'joined'],
-    name: 'hello-card-component',
+    name: 'my-courses-card-component',
     data () {
       return {
         status: this.joined
