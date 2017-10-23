@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '../components/Hello'
 import Course from '../components/Course'
-// import 'babel-runtime/core-js/json/stringify';
+import Group from '../components/Group'
 
 Vue.use(Router)
 
@@ -18,6 +18,12 @@ export default new Router({
       path: '/course',
       name: 'Course',
       component: Course,
+      props: true
+    },
+    {
+      path: '/group',
+      name: 'Group',
+      component: Group,
       props: true
     }
   ]

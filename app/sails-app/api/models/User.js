@@ -27,8 +27,7 @@ module.exports = {
     },
     groupList: {
       collection: 'group',
-      via: 'userList',
-      dominant: true
+      via: 'userList'
     },
     joinedCourses: {
       collection: 'course',

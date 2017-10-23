@@ -57,7 +57,7 @@
 
 <script>
   import Card from './course/Card'
-  const axios = require('axios')
+  import * as axios from 'axios'
   export default {
     props: ['user'],
     name: 'course-component',
