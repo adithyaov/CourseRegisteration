@@ -1,0 +1,8 @@
+{
+	"expected traffic": 300,
+	"uptime gaureentee required": true,
+	"app type": "web",
+	"req type": "json",
+	"sockets": false,
+	"crash tracking": false
+}
