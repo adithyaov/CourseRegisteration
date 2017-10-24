@@ -36,7 +36,22 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  '/user/authenticate/:token': 'UserController.authenticate'
+  'post /user/authenticate': 'UserController.authenticate',
+  'post /user/logout': 'UserController.logout',
+  'get /user/loginStatus': 'UserController.loginStatus',
+
+  'get /course/list': 'CourseController.list',
+  'get /course/owned': 'CourseController.owned',
+  'post /course/join/:id': 'CourseController.join',
+  'post /course/leave/:id': 'CourseController.leave',
+  'post /course/create': 'CourseController.create',
+  'post /course/update/:id': 'CourseController.update',
+  'post /course/delete/:id': 'CourseController.delete',
+
+  'get /group/owned': 'GroupController.owned',
+  'post /group/create': 'GroupController.create',
+  'post /group/update/:id': 'GroupController.update',
+  'post /group/delete/:id': 'GroupController.delete'
 
   /***************************************************************************
   *                                                                          *

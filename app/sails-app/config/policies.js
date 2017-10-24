@@ -27,6 +27,22 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  'UserController.authenticate': true,
+  'UserController.logout': true,
+  'UserController.loginStatus': true,
+
+  'CourseController.list': 'isUser',
+  'CourseController.owned': 'isOwner',
+  'CourseController.join': 'isUser',
+  'CourseController.leave': 'isUser',
+  'CourseController.create': 'isOwner',
+  'CourseController.update': ['isOwner', 'isCourseOwner'],
+  'CourseController.delete': ['isOwner', 'isCourseOwner'],
+
+  'GroupController.owned': 'isOwner',
+  'GroupController.create': 'isOwner',
+  'GroupController.update': ['isOwner', 'isGroupOwner'],
+  'GroupController.delete': ['isOwner', 'isGroupOwner']
 
   /***************************************************************************
   *                                                                          *
