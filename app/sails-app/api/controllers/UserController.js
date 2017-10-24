@@ -9,12 +9,6 @@ var GoogleAuth = require('google-auth-library');
 var CLIENT_ID = '578466896799-k9k6ugjrb3rncqsg8jbfcpeoar8bgndl.apps.googleusercontent.com'
 
 module.exports = {
-	'login': (req, res) => {
-		req.session.user = {}
-		req.session.user.id = req.params.id
-		req.session.user.type = 'owner'
-		res.json(req.session.user)
-	},
 	'loginStatus': (req, res) => {
 		var user = req.session.user
 		res.json({user: user})
@@ -26,7 +20,6 @@ module.exports = {
 	'authenticate': (req, res) => {
 		try {
 			token = req.body.token
-			console.log(token);
 			var auth = new GoogleAuth;
 			var client = new auth.OAuth2(CLIENT_ID, '', '');
 			client.verifyIdToken(

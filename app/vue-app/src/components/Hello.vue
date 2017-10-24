@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2 v-if="user">Hi {{user.name}},</h2>
-    <h2 v-else="user">Hi :-),</h2>
+    <h2 v-if="heavenProp.checkScore(heavenProp.user.type) >= 1">Hi {{heavenProp.user.name}},</h2>
+    <h2 v-else="heavenProp.checkScore(heavenProp.user.type) >= 1">Hi :-),</h2>
     <div class="main">
       <b>What is this website for?</b>
       <blockquote>
@@ -23,7 +23,7 @@
 
 <script>
   export default {
-    props: ['user'],
+    props: ['heavenProp'],
     name: 'hello-component'
   }
 </script>

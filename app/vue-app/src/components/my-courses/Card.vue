@@ -15,7 +15,7 @@
 <script>
   import * as axios from 'axios'
   export default {
-    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'joined'],
+    props: ['id', 'name', 'code', 'credits', 'contact', 'instructor', 'joined', 'heavenProp'],
     name: 'my-courses-card-component',
     data () {
       return {
@@ -37,9 +37,11 @@
           var res = await axios.post('/course/join/' + this.id, null)
           if (res.data.joined === true) {
             this.status = true
+          } else {
+            alert('[ERROR] Could not join course')
           }
         } catch (e) {
-          alert('Something wrong with the server.')
+          alert('[DEBUG] ' + e)
         }
       },
       leaveCourse: async function (event) {
@@ -47,9 +49,11 @@
           var res = await axios.post('/course/leave/' + this.id, null)
           if (res.data.left === true) {
             this.status = false
+          } else {
+            alert('[ERROR] Could not leave course')
           }
         } catch (e) {
-          alert('Something wrong with the server.')
+          alert('[DEBUG] ' + e)
         }
       }
     }

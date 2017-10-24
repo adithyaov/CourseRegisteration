@@ -2,35 +2,35 @@
   <div>
     <h2>Courses.</h2>
     <div class="main">
-      <blockquote v-if="!user">
+      <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 1">
         <p>Please login to view your courses :-)</p>
       </blockquote>
-      <div v-if="user">
+      <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
         <form v-on:submit="createForm" class="create-form">
           <table class="form-table">
           <tr>
             <td><b>Name:</b></td>
-            <td><input name="name" id="name" type="text" placeholder="eg. Machine Learning" /></td>
+            <td><input name="name" id="name" type="text" placeholder="eg. Force training" /></td>
           </tr>
           <tr>
             <td><b>Code:</b></td>
-            <td><input name="code" id="code" type="text" placeholder="eg. CS5534" /></td>
+            <td><input name="code" id="code" type="text" placeholder="eg. force-class-53" /></td>
           </tr>
           <tr>
             <td><b>Credits:</b></td>
-            <td><input name="credits" id="credits" type="text" placeholder="eg. 4" /></td>
+            <td><input name="credits" id="credits" type="text" placeholder="eg. 5" /></td>
           </tr>
           <tr>
             <td><b>Contact:</b></td>
-            <td><input name="contact" id="contact" type="text" placeholder="eg. ml@iitpkd.ac.in" /></td>
+            <td><input name="contact" id="contact" type="text" placeholder="eg. yoda@jedi.com" /></td>
           </tr>
           <tr>
             <td><b>Instructor:</b></td>
-            <td><input name="instructor" id="instructor" type="text" placeholder="eg. Dr Sahely" /></td>
+            <td><input name="instructor" id="instructor" type="text" placeholder="eg. Yoda" /></td>
           </tr>
           <tr>
             <td><b>Target group codes:</b></td>
-            <td><textarea id="groupCodes" placeholder="seperated by commas. eg. cs-2015, cs-2016"></textarea></td>
+            <td><textarea id="groupCodes" placeholder="seperated by commas. eg. jedi-batch-1, jedi-batch-2"></textarea></td>
           </tr>
           <tr>
             <td><input type="submit" value="Create" /></td>
@@ -38,7 +38,11 @@
           </tr>
           </table>
         </form>
-        <card-component v-for="c in courses"
+        <blockquote v-if="courses.length === 0">
+          <p>You don't own any course yet! Use the form above to create a course.</p>
+        </blockquote>
+        <card-component v-if="courses.length > 0" v-for="c in courses"
+          v-bind:heavenProp="heavenProp"
           v-bind:key="c.id"
           v-bind:id="c.id"
           v-bind:name="c.name"
@@ -59,26 +63,18 @@
   import Card from './course/Card'
   import * as axios from 'axios'
   export default {
-    props: ['user'],
+    props: ['heavenProp'],
     name: 'course-component',
     beforeMount () {
-      if (this.user) {
+      if (this.heavenProp.checkScore(this.heavenProp.user.type) >= 2) {
         this.getCourses()
+      } else {
+        this.$router.push('/')
       }
     },
     data () {
       return {
-        courses: [
-          {
-            id: 3,
-            name: 'Test',
-            code: 'CS6654',
-            credits: 5,
-            instructor: 'Dr. Sahely',
-            contact: 'sahely@ml.com',
-            groupCodes: ['G1', 'G2', 'G3', 'G4']
-          }
-        ]
+        courses: []
       }
     },
     components: {
@@ -87,8 +83,8 @@
     methods: {
       createForm: async function (event) {
         try {
+          this.heavenProp.setLoaderState(true)
           event.preventDefault()
-          alert('In create')
           const createFrom = document.querySelector('.create-form')
           var postData = {
             name: createFrom.querySelector('#name').value,
@@ -116,38 +112,44 @@
               groupCodes: res.data.validGroupCodes
             })
           } else {
-            alert('Course could not be created.')
+            alert('[ERROR] Course could not be created.')
           }
+          this.heavenProp.setLoaderState(false)
         } catch (e) {
-          alert('Something wrong with the server.')
+          alert('[DEBUG] ' + e)
+          this.heavenProp.setLoaderState(false)
         }
       },
       getCourses: async function () {
         try {
-          alert('Getting Data in Courses')
+          this.heavenProp.setLoaderState(true)
           var res = await axios.get('/course/owned')
-          var dataCourses = res.data.courses.map((c) => {
-            return {
-              id: c.id,
-              name: c.name,
-              code: c.code,
-              instructor: c.instructor,
-              credits: c.credits,
-              contact: c.contact,
-              groupCodes: c.groupList.map(g => g.code)
-            }
-          })
-          this.courses = dataCourses
+          if (res.data.courses) {
+            var dataCourses = res.data.courses.map((c) => {
+              return {
+                id: c.id,
+                name: c.name,
+                code: c.code,
+                instructor: c.instructor,
+                credits: c.credits,
+                contact: c.contact,
+                groupCodes: c.groupList.map(g => g.code)
+              }
+            })
+            this.courses = dataCourses
+          } else {
+            alert('[ERROR] Could not get courses.')
+          }
+          this.heavenProp.setLoaderState(false)
         } catch (e) {
-          alert('Something wrong with the server.')
+          alert('[DEBUG] ' + e)
+          this.heavenProp.setLoaderState(false)
         }
       },
       deleteFromList: function (id) {
-        alert('in Delete')
         this.courses = this.courses.filter((c) => c.id !== id)
       },
       updateContent: function (id, name, instructor, credits, contact, groupCodes) {
-        alert('in Update')
         this.courses = this.courses.map(c => {
           if (c.id === id) {
             return {

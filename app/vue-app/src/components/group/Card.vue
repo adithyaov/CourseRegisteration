@@ -27,7 +27,7 @@
 <script>
   import * as axios from 'axios'
   export default {
-    props: ['id', 'name', 'code', 'contact', 'userEmails', 'deleteFromList', 'updateContent'],
+    props: ['id', 'name', 'code', 'contact', 'userEmails', 'deleteFromList', 'updateContent', 'heavenProp'],
     name: 'group-card-component',
     data () {
       return {
@@ -43,40 +43,42 @@
       },
       updateForm: async function (event) {
         try {
+          this.heavenProp.setLoaderState(true)
           event.preventDefault()
-          alert('In submission')
           const updateFrom = document.querySelector('.update-form')
           var postData = {
             name: updateFrom.querySelector('#name').value,
             contact: updateFrom.querySelector('#contact').value,
             userEmails: updateFrom.querySelector('#userEmails').value
           }
-          alert(JSON.stringify(postData))
           var res = await axios.post('/group/update/' + this.id, postData)
-          alert(JSON.stringify(res))
           if (res.data.updated) {
             this.updateContent(this.id,
               postData.name, postData.contact,
               res.data.validUserEmails)
             this.mode = 'view'
           } else {
-            throw Error('Update was not possible.')
+            alert('[ERROR] Update was not possible')
           }
+          this.heavenProp.setLoaderState(false)
         } catch (e) {
-          alert('Update was not possible.')
+          alert('[DEBUG] ' + e)
+          this.heavenProp.setLoaderState(false)
         }
       },
       deleteCurrent: async function () {
         try {
-          alert('In deleting')
+          this.heavenProp.setLoaderState(true)
           var res = await axios.post('/group/delete/' + this.id, null)
           if (res.data.deleted) {
             this.deleteFromList()
           } else {
-            throw Error('Delete was not possible.')
+            alert('[ERROR] Delete was not possible')
           }
+          this.heavenProp.setLoaderState(false)
         } catch (e) {
-          alert('Delete was not possible.')
+          alert('[DEBUG] ' + e)
+          this.heavenProp.setLoaderState(false)
         }
       }
     }
