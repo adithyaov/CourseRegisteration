@@ -29,7 +29,7 @@
             <td><input name="instructor" id="instructor" type="text" placeholder="eg. Yoda" /></td>
           </tr>
           <tr>
-            <td><b>Target group codes:</b></td>
+            <td><b>Groups:</b></td>
             <td><textarea id="groupCodes" placeholder="seperated by commas. eg. jedi-batch-1, jedi-batch-2"></textarea></td>
           </tr>
           <tr>
