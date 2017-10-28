@@ -15,21 +15,9 @@
       <div class="card-header-title">
         {{code}}
       </div>
-      <div class="dropdown is-right is-hoverable">
-        <a class="dropdown-trigger card-header-icon" aria-label="more options">
-          options
-          <span class="icon">
-            <i class="fa fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </a>
-        <div class="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <div class="dropdown-item">
-              <a v-if="!status" v-on:click="joinCourse">Join</a>
-              <a v-if="status" v-on:click="leaveCourse">Leave</a>
-            </div>
-          </div>
-        </div>
+      <div class="card-header-icon">
+        <a v-if="!status" v-on:click="joinCourse">Join</a>
+        <a v-if="status" v-on:click="leaveCourse">Leave</a>
       </div>
     </header>
     <div class="card-content">
@@ -96,5 +84,8 @@
   .modified-card {
     border-left: 2px solid #c0c0c0;
     margin-bottom: 10px;
+  }
+  .modified-card .card-header-icon a {
+    margin-left: 10px;
   }
 </style>

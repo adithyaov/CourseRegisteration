@@ -53,6 +53,9 @@
             </div>
 
           </form>
+
+          <br />
+
           <blockquote v-if="courses.length === 0">
             <p>You don't own any course yet! Use the form above to create a course.</p>
           </blockquote>

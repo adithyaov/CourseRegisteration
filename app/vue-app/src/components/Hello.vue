@@ -7,10 +7,10 @@
           <h1 class="title" v-else="heavenProp.checkScore(heavenProp.user.type) >= 1">Hi Anomymous</h1>
         </h1>
         <h2 class="subtitle">
-          <p v-if="heavenProp.checkScore(heavenProp.user.type >= 1)">
+          <p v-if="heavenProp.checkScore(heavenProp.user.type) >= 1">
             Welcome to course registeration, IIT Palakkad.
           </p>
-          <p v-else="heavenProp.checkScore(heavenProp.user.type >= 1)">
+          <p v-else="heavenProp.checkScore(heavenProp.user.type) >= 1">
             Sign In to get started.
           </p>
         </h2>
