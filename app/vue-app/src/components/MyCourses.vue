@@ -1,28 +1,31 @@
 <template>
-  <div>
-    <h2>My Courses.</h2>
-    <div class="main">
-      <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 0">
-        <p>Please login to view your courses :-)</p>
-      </blockquote>
-      <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 1">
-        <blockquote v-if="courses.length === 0">
-          <p>You don't have any courses yet.</p>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">My Courses.</h1>
+      <hr />
+      <div class="content">
+        <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 0">
+          <p>Please login to view your courses :-)</p>
         </blockquote>
-        <card-component v-if="courses.length > 0" v-for="c in courses"
-          v-bind:heavenProp="heavenProp"
-          v-bind:key="c.id"
-          v-bind:id="c.id"
-          v-bind:name="c.name"
-          v-bind:code="c.code"
-          v-bind:credits="c.credits"
-          v-bind:instructor="c.instructor"
-          v-bind:contact="c.contact"
-          v-bind:joined="c.joined"
-        ></card-component>
+        <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 1">
+          <blockquote v-if="courses.length === 0">
+            <p>You don't have any courses yet.</p>
+          </blockquote>
+          <card-component v-if="courses.length > 0" v-for="c in courses"
+            v-bind:heavenProp="heavenProp"
+            v-bind:key="c.id"
+            v-bind:id="c.id"
+            v-bind:name="c.name"
+            v-bind:code="c.code"
+            v-bind:credits="c.credits"
+            v-bind:instructor="c.instructor"
+            v-bind:contact="c.contact"
+            v-bind:joined="c.joined"
+          ></card-component>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -78,7 +81,5 @@
 </script>
 
 <style scoped>
-  .main {
-    margin-top: 30px;
-  }
+
 </style>

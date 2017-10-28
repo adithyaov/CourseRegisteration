@@ -1,62 +1,78 @@
 <template>
-  <div>
-    <h2>Courses.</h2>
-    <div class="main">
-      <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 1">
-        <p>Please login to view your courses :-)</p>
-      </blockquote>
-      <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
-        <form v-on:submit="createForm" class="create-form">
-          <table class="form-table">
-          <tr>
-            <td><b>Name:</b></td>
-            <td><input name="name" id="name" type="text" placeholder="eg. Force training" /></td>
-          </tr>
-          <tr>
-            <td><b>Code:</b></td>
-            <td><input name="code" id="code" type="text" placeholder="eg. force-class-53" /></td>
-          </tr>
-          <tr>
-            <td><b>Credits:</b></td>
-            <td><input name="credits" id="credits" type="text" placeholder="eg. 5" /></td>
-          </tr>
-          <tr>
-            <td><b>Contact:</b></td>
-            <td><input name="contact" id="contact" type="text" placeholder="eg. yoda@jedi.com" /></td>
-          </tr>
-          <tr>
-            <td><b>Instructor:</b></td>
-            <td><input name="instructor" id="instructor" type="text" placeholder="eg. Yoda" /></td>
-          </tr>
-          <tr>
-            <td><b>Groups:</b></td>
-            <td><textarea id="groupCodes" placeholder="seperated by commas. eg. jedi-batch-1, jedi-batch-2"></textarea></td>
-          </tr>
-          <tr>
-            <td><input type="submit" value="Create" /></td>
-            <td></td>
-          </tr>
-          </table>
-        </form>
-        <blockquote v-if="courses.length === 0">
-          <p>You don't own any course yet! Use the form above to create a course.</p>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">My Courses.</h1>
+      <hr />
+      <div class="content">
+        <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 1">
+          <p>Please login to view your courses :-)</p>
         </blockquote>
-        <card-component v-if="courses.length > 0" v-for="c in courses"
-          v-bind:heavenProp="heavenProp"
-          v-bind:key="c.id"
-          v-bind:id="c.id"
-          v-bind:name="c.name"
-          v-bind:code="c.code"
-          v-bind:credits="c.credits"
-          v-bind:instructor="c.instructor"
-          v-bind:contact="c.contact"
-          v-bind:groupCodes="c.groupCodes"
-          v-bind:deleteFromList="deleteFromList.bind(null, c.id)"
-          v-bind:updateContent="updateContent"
-        ></card-component>
+        <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
+          <form v-on:submit="createForm" class="create-form">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" name="name" id="name" type="text" placeholder="eg. Force training">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Code</label>
+              <div class="control">
+                <input class="input" name="code" id="code" type="text" placeholder="eg. force-class-53">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Credits</label>
+              <div class="control">
+                <input class="input" name="credits" id="credits" type="text" placeholder="eg. 5">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Contact</label>
+              <div class="control">
+                <input class="input" name="contact" id="contact" type="text" placeholder="eg. yoda@jedi.com">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Instructor</label>
+              <div class="control">
+                <input class="input" name="instructor" id="instructor" type="text" placeholder="eg. Yoda">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Groups</label>
+              <div class="control">
+                <textarea class="textarea" id="groupCodes" placeholder="seperated by commas. eg. jedi-batch-1, jedi-batch-2"></textarea>
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                <input class="button is-primary" type="submit" value="Create" />
+              </div>
+            </div>
+
+          </form>
+          <blockquote v-if="courses.length === 0">
+            <p>You don't own any course yet! Use the form above to create a course.</p>
+          </blockquote>
+          <card-component v-if="courses.length > 0" v-for="c in courses"
+            v-bind:heavenProp="heavenProp"
+            v-bind:key="c.id"
+            v-bind:id="c.id"
+            v-bind:name="c.name"
+            v-bind:code="c.code"
+            v-bind:credits="c.credits"
+            v-bind:instructor="c.instructor"
+            v-bind:contact="c.contact"
+            v-bind:groupCodes="c.groupCodes"
+            v-bind:deleteFromList="deleteFromList.bind(null, c.id)"
+            v-bind:updateContent="updateContent"
+          ></card-component>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

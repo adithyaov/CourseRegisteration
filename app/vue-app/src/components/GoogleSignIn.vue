@@ -1,5 +1,12 @@
 <template>
-  <a ref="signinBtn" class="btn-sign-in">Sign In</a>
+  <a ref="signinBtn" class="bd-tw-button button is-primary">
+    <span class="icon">
+      <i class="fa fa-google"></i>
+    </span>
+    <span>
+      Sign In
+    </span>
+  </a>
 </template>
 
 <script>

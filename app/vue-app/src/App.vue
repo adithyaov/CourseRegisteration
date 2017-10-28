@@ -108,7 +108,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 20px;
 }
 .loading {
   position: fixed;
@@ -128,6 +127,7 @@ export default {
   transition: all 300ms ease-in-out;
   vertical-align: middle;
   line-height: 200px;
+  z-index: 100;
 }
 .loading span {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:style="{'border-color': statusColor}" class="card">
+  <!-- <div v-bind:style="{'border-color': statusColor}" class="card">
     <h5 class="code">{{code}}</h5>
     <div><b>Name:</b> {{name}}</div>
     <div><b>Credits:</b> {{credits}}</div>
@@ -9,7 +9,39 @@
       <a v-if="!status" v-on:click="joinCourse">Join</a>
       <a v-if="status" v-on:click="leaveCourse">Leave</a>
     </div>
+  </div> -->
+  <div v-bind:style="{'border-color': statusColor}" class="card modified-card">
+    <header class="card-header">
+      <div class="card-header-title">
+        {{code}}
+      </div>
+      <div class="dropdown is-right is-hoverable">
+        <a class="dropdown-trigger card-header-icon" aria-label="more options">
+          options
+          <span class="icon">
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </a>
+        <div class="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <div class="dropdown-item">
+              <a v-if="!status" v-on:click="joinCourse">Join</a>
+              <a v-if="status" v-on:click="leaveCourse">Leave</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <div><b>Name:</b> {{name}}</div>
+        <div><b>Credits:</b> {{credits}}</div>
+        <div><b>Contact:</b> {{contact}}</div>
+        <div><b>Instructor:</b> {{instructor}}</div>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -25,7 +57,7 @@
     computed: {
       statusColor: function () {
         if (this.status) {
-          return '#2c8898'
+          return '#999999'
         } else {
           return '#c0c0c0'
         }
@@ -61,25 +93,8 @@
 </script>
 
 <style scoped>
-  .code {
-    margin: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .options {
-    position: absolute;
-    top: 12px;
-    right: 0;
-  }
-  .options a {
-    margin-right: 20px;
-  }
-  .card {
-    position: relative;
-    border: 0;
-    border-left: 4px solid #c0c0c0;
-    padding: 10px;
-    margin-top: 30px;
-    background-color: #fff;
+  .modified-card {
+    border-left: 2px solid #c0c0c0;
+    margin-bottom: 10px;
   }
 </style>
