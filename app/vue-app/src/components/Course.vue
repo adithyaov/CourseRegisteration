@@ -190,17 +190,7 @@
 </script>
 
 <style scoped>
-  .main {
-    margin-top: 30px;
-  }
   .create-form {
     max-width: 500px;
-  }
-  .form-table tr, .form-table td, .form-table {
-    border: 0;
-  }
-  .form-table tr td {
-    margin: 0;
-    padding: 3px;
   }
 </style>

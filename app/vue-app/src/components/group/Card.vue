@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <!-- <div class="card">
     <h5 class="code">{{code}}</h5>
     <div v-if="mode == 'view'">
       <div><b>Name:</b> {{name}}</div>
@@ -19,6 +19,51 @@
       </form>
       <div class="options">
         <a v-on:click="changeModeToView">Close</a>
+      </div>
+    </div>
+  </div> -->
+  <div class="card modified-card">
+    <header class="card-header">
+      <div class="card-header-title">
+        {{code}}
+      </div>
+      <div v-if="mode == 'view'" class="card-header-icon">
+        <a v-on:click="changeMode">Edit</a>
+        <a v-on:click="deleteCurrent">Delete</a>
+      </div>
+      <div v-if="mode == 'edit'" class="card-header-icon">
+        <a v-on:click="changeModeToView">Close</a>
+      </div>
+    </header>
+    <div class="card-content">
+      <div v-if="mode == 'view'" class="content">
+        <div><b>Name:</b> {{name}}</div>
+        <div><b>Contact:</b> {{contact}}</div>
+        <div><b>Users:</b> {{userEmails.join(', ')}}</div>
+      </div>
+      <div v-if="mode == 'edit'" class="content">
+        <form v-on:submit="updateForm" class="update-form">
+          <div class="field">
+            <div class="control">
+              <input :value="name" class="input" name="name" id="name" type="text" placeholder="Name">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input :value="contact" class="input" name="contact" id="contact" type="text" placeholder="Contact">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <textarea class="textarea" id="userEmails" name="userEmails" placeholder="Users">{{userEmails.join(', ')}}</textarea>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <input class="button is-link" type="submit" value="Update" />
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -86,28 +131,11 @@
 </script>
 
 <style scoped>
-  .code {
-    margin: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
-  .options {
-    position: absolute;
-    top: 12px;
-    right: 0;
-  }
-  .options a {
-    margin-right: 20px;
-  }
-  .card {
-    position: relative;
-    border: 0;
-    border-left: 4px solid #c0c0c0;
-    padding: 10px;
-    margin-top: 30px;
-    background-color: #fff;
-  }
-  .card:hover {
-    border-left: 4px solid #a0a0a0;
-  }
+.modified-card {
+  border-left: 2px solid #c0c0c0;
+  margin-bottom: 10px;
+}
+.modified-card .card-header-icon a {
+  margin-left: 12px;
+}
 </style>

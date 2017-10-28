@@ -26,7 +26,7 @@
       </div>
     </div>
   </div> -->
-  <div v-bind:style="{'border-color': statusColor}" class="card modified-card">
+  <div class="card modified-card">
     <header class="card-header">
       <div class="card-header-title">
         {{code}}
@@ -71,7 +71,7 @@
           </div>
           <div class="field">
             <div class="control">
-              <textarea class="textarea" id="groupCodes" name="groupCodes">{{groupCodes.join(', ')}}</textarea>
+              <textarea class="textarea" id="groupCodes" name="groupCodes" placeholder="Groups">{{groupCodes.join(', ')}}</textarea>
             </div>
           </div>
           <div class="field">
@@ -155,6 +155,6 @@
   margin-bottom: 10px;
 }
 .modified-card .card-header-icon a {
-  margin-left: 10px;
+  margin-left: 12px;
 }
 </style>

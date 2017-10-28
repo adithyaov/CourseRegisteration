@@ -1,52 +1,63 @@
 <template>
-  <div>
-    <h2>Groups.</h2>
-    <div class="main">
-      <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 1">
-        <p>Please login to view your groups :-)</p>
-      </blockquote>
-      <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
-        <form v-on:submit="createForm" class="create-form">
-          <table class="form-table">
-          <tr>
-            <td><b>Name:</b></td>
-            <td><input name="name" id="name" type="text" placeholder="eg. Jedi batch 1" /></td>
-          </tr>
-          <tr>
-            <td><b>Code:</b></td>
-            <td><input name="code" id="code" type="text" placeholder="eg. jedi-batch-1" /></td>
-          </tr>
-          <tr>
-            <td><b>Contact:</b></td>
-            <td><input name="contact" id="contact" type="text" placeholder="eg. batch1@jedi.com" /></td>
-          </tr>
-          <tr>
-            <td><b>Users:</b></td>
-            <td><textarea id="userEmails" placeholder="email's seperated by commas. eg. luke@jedi.com, rey@jedi.com"></textarea></td>
-          </tr>
-          <tr>
-            <td><input type="submit" value="Create" /></td>
-            <td></td>
-          </tr>
-          </table>
-        </form>
-        <blockquote v-if="groups.length === 0">
-          <p>You don't own any group yet! Use the form above to create a group.</p>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">My Groups.</h1>
+      <hr />
+      <div class="content">
+        <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 1">
+          <p>Please login to view your groups :-)</p>
         </blockquote>
-        <card-component v-if="groups.length > 0" v-for="g in groups"
-          v-bind:heavenProp="heavenProp"
-          v-bind:key="g.id"
-          v-bind:id="g.id"
-          v-bind:name="g.name"
-          v-bind:code="g.code"
-          v-bind:contact="g.contact"
-          v-bind:userEmails="g.userEmails"
-          v-bind:deleteFromList="deleteFromList.bind(null, g.id)"
-          v-bind:updateContent="updateContent"
-        ></card-component>
+        <div v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
+          <form v-on:submit="createForm" class="create-form">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" name="name" id="name" type="text" placeholder="eg. Jedi batch 1">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Code</label>
+              <div class="control">
+                <input class="input" name="code" id="code" type="text" placeholder="eg. jedi-batch-1">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Contact</label>
+              <div class="control">
+                <input class="input" name="contact" id="contact" type="text" placeholder="eg. batch1@jedi.com">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Users</label>
+              <div class="control">
+                <textarea class="textarea" id="userEmails" placeholder="email's seperated by commas. eg. luke@jedi.com, rey@jedi.com"></textarea>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <input class="button is-primary" type="submit" value="Create" />
+              </div>
+            </div>
+            <br />
+          </form>
+          <blockquote v-if="groups.length === 0">
+            <p>You don't own any group yet! Use the form above to create a group.</p>
+          </blockquote>
+          <card-component v-if="groups.length > 0" v-for="g in groups"
+            v-bind:heavenProp="heavenProp"
+            v-bind:key="g.id"
+            v-bind:id="g.id"
+            v-bind:name="g.name"
+            v-bind:code="g.code"
+            v-bind:contact="g.contact"
+            v-bind:userEmails="g.userEmails"
+            v-bind:deleteFromList="deleteFromList.bind(null, g.id)"
+            v-bind:updateContent="updateContent"
+          ></card-component>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -151,17 +162,7 @@
 </script>
 
 <style scoped>
-  .main {
-    margin-top: 30px;
-  }
   .create-form {
     max-width: 500px;
-  }
-  .form-table tr, .form-table td, .form-table {
-    border: 0;
-  }
-  .form-table tr td {
-    margin: 0;
-    padding: 3px;
   }
 </style>
