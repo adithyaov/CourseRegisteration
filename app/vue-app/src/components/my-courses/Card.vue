@@ -1,15 +1,4 @@
 <template>
-  <!-- <div v-bind:style="{'border-color': statusColor}" class="card">
-    <h5 class="code">{{code}}</h5>
-    <div><b>Name:</b> {{name}}</div>
-    <div><b>Credits:</b> {{credits}}</div>
-    <div><b>Contact:</b> {{contact}}</div>
-    <div><b>Instructor:</b> {{instructor}}</div>
-    <div class="options">
-      <a v-if="!status" v-on:click="joinCourse">Join</a>
-      <a v-if="status" v-on:click="leaveCourse">Leave</a>
-    </div>
-  </div> -->
   <div v-bind:style="{'border-color': statusColor}" class="card modified-card">
     <header class="card-header">
       <div class="card-header-title">

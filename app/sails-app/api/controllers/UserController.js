@@ -110,4 +110,14 @@ module.exports = {
             res.json({error: e})
         }
     },
+    'getTypes': async (req, res) => {
+        try {
+            var type = req.params.type
+            var typeUsers = await User.find({type: type})
+            res.json({typeUsers: typeUsers})
+        } catch (e) {
+            console.log(e);
+            res.json({error: e})
+        }
+    },
 };

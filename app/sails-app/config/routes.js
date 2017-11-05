@@ -42,6 +42,7 @@ module.exports.routes = {
   'post /user/demote': 'UserController.demote',
   'post /user/logout': 'UserController.logout',
   'get /user/loginStatus': 'UserController.loginStatus',
+  'get /user/getTypes/:type': 'UserController.getTypes',
 
   'get /course/list': 'CourseController.list',
   'get /course/owned': 'CourseController.owned',

@@ -30,6 +30,9 @@
             <router-link v-if="heavenProp.checkScore(heavenProp.user.type) >= 2" class="navbar-item" :to="{ path: '/bulk' }">
               Bulk Post
             </router-link>
+            <router-link v-if="heavenProp.checkScore(heavenProp.user.type) >= 3" class="navbar-item" :to="{ path: '/promote' }">
+              Promote
+            </router-link>
           </div>
 
           <div class="navbar-end">

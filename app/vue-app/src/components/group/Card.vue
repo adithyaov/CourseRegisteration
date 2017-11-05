@@ -1,27 +1,4 @@
 <template>
-  <!-- <div class="card">
-    <h5 class="code">{{code}}</h5>
-    <div v-if="mode == 'view'">
-      <div><b>Name:</b> {{name}}</div>
-      <div><b>Contact:</b> {{contact}}</div>
-      <div><b>Users:</b> {{userEmails.join(', ')}}</div>
-      <div class="options">
-        <a v-on:click="changeMode">Edit</a>
-        <a v-on:click="deleteCurrent">Delete</a>
-      </div>
-    </div>
-    <div v-if="mode == 'edit'">
-      <form v-on:submit="updateForm" class="update-form">
-        <div><b>Name:</b> <br /> <input id="name" name="name" type="text" :value="name" /></div>
-        <div><b>Contact:</b> <br /> <input id="contact" name="contact" type="text" :value="contact" /></div>
-        <div><b>Users:</b> <br /> <textarea id="userEmails" name="userEmails">{{userEmails.join(', ')}}</textarea></div>
-        <div><input type="submit" value="Update" /></div>
-      </form>
-      <div class="options">
-        <a v-on:click="changeModeToView">Close</a>
-      </div>
-    </div>
-  </div> -->
   <div class="card modified-card">
     <header class="card-header">
       <div class="card-header-title">

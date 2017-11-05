@@ -33,6 +33,7 @@ module.exports.policies = {
   'UserController.create': 'isOwner',
   'UserController.promote': 'isAdmin',
   'UserController.demote': 'isAdmin',
+  'UserController.getTypes': 'isUser',
 
   'CourseController.list': 'isUser',
   'CourseController.owned': 'isOwner',
