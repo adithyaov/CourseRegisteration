@@ -11,11 +11,11 @@ var CLIENT_ID = sails.config.keys.GOOGLE_CLIENT_ID
 module.exports = {
     'loginStatus': (req, res) => {
         var user = req.session.user
-        res.json({user: user})
+        return res.json({user: user})
     },
     'logout': (req, res) => {
         req.session.user = {}
-        res.json({user: false})
+        return res.json({user: false})
     },
     'authenticate': (req, res) => {
         try {
@@ -45,11 +45,11 @@ module.exports = {
                     }
                     var user = await User.findOrCreate(findCriteria, createCriteria)
                     req.session.user = user
-                    res.json({user: user})
+                    return res.json({user: user})
                 }
             );
         } catch (e) {
-            res.json({error: e})
+            return res.json({error: e})
         }
     },
     'create': async (req, res) => {
@@ -68,56 +68,43 @@ module.exports = {
                     User.destroy({id: user.id})
                     throw Error(e)
                 } else {
-                    res.json({status: true})
+                    return res.json({status: true})
                 }
             })
         } catch (e) {
             console.log(e);
-            res.json({error: e})
+            return res.json({error: e})
         }
     },
-    'promote': async (req, res) => {
+    'updateType': async (req, res) => {
         try {
-            promoteEmail = req.body.promoteEmail
-            var user = User.findOne({email: promoteEmail})
-            if (user.type == 'admin') {
-                return res.json({error: 'Can\'t promote Admin'})
+            email = req.body.email
+            toType = req.body.type
+            var user = await User.findOne({email: email})
+            if (user.type == 'admin' || toType == 'admin') {
+                return res.json({error: 'Can\'t change Admin type or to Admin type'})
+            }
+            if (toType != 'user' && toType != 'owner') {
+                return res.json({error: 'Can\'t change to unknown type'})
             }
             var data = {
-                type: 'owner'
+                type: toType
             }
-            update = await User.update({email: promoteEmail}, data)
-            res.json({promoted: true})
+            update = await User.update({email: email}, data)
+            return res.json({changedType: true, user: user})
         } catch (e) {
             console.log(e);
-            res.json({error: e})
-        }
-    },
-    'demote': async (req, res) => {
-        try {
-            demoteEmail = req.body.demoteEmail
-            var user = User.findOne({email: demoteEmail})
-            if (user.type == 'admin') {
-                return res.json({error: 'Can\'t demote Admin'})
-            }
-            var data = {
-                type: 'user'
-            }
-            update = await User.update({email: demoteEmail}, data)
-            res.json({demoted: true})
-        } catch (e) {
-            console.log(e);
-            res.json({error: e})
+            return res.json({error: e})
         }
     },
     'getTypes': async (req, res) => {
         try {
             var type = req.params.type
             var typeUsers = await User.find({type: type})
-            res.json({typeUsers: typeUsers})
+            return res.json({typeUsers: typeUsers})
         } catch (e) {
             console.log(e);
-            res.json({error: e})
+            return res.json({error: e})
         }
     },
 };

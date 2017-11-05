@@ -29,7 +29,7 @@
               <br />
               `name`, `code`, `credits`, `contact`, `instructor`, `groups [`group`]`
               <br />
-              Example :- <br /> Force Training 101, ft-101, yoda@academy.com, Master Yoda, [jedi-group1, jedi-group2]
+              Example :- <br /> Force Training 101, ft-101, 4, yoda@academy.com, Master Yoda, [jedi-group1, jedi-group2]
             </div>
           </article>
           <form v-on:submit="postForm" class="post-form">

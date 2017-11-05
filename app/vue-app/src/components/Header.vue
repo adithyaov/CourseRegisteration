@@ -1,18 +1,10 @@
 <template>
   <div>
-    <!-- <ul class="nav">
-      <li class="left">Home</li>
-      <li class="left" v-if="heavenProp.checkScore(heavenProp.user.type) >= 1"><router-link class="navbar-item" :to="{ path: '/my-courses' }">My Courses</router-link></li>
-      <li class="left" v-if="heavenProp.checkScore(heavenProp.user.type) >= 2"><router-link class="navbar-item" :to="{ path: '/course' }">Courses</router-link></li>
-      <li class="left" v-if="heavenProp.checkScore(heavenProp.user.type) >= 2"><a><router-link class="navbar-item" :to="{ path: '/group' }">Groups</router-link></a></li>
-      <li class="right" v-if="heavenProp.checkScore(heavenProp.user.type) >= 1"><a v-on:click="logOut">Sign Out</a></li>
-      <li class="right" v-else="heavenProp.checkScore(heavenProp.user.type) >= 1"><g-signin-button @done="onUserLoggedIn"/></li>
-    </ul> -->
     <nav style="z-index:101" class="navbar is-transparent is-primary">
       <div class="container">
         <div class="navbar-brand">
           <router-link class="navbar-item" :to="{ path: '/' }">
-            IIT Pkd logo
+            IIT Palakkad
           </router-link>
         </div>
 
