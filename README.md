@@ -1,4 +1,4 @@
-### Working product : https://sleepy-castle-30151.herokuapp.com/ ###  
+### Working product : https://sleepy-castle-30151.herokuapp.com/  
 
 # Developer Rules #
 
