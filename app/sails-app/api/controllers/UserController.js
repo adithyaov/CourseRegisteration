@@ -6,7 +6,7 @@
  */
 
 var GoogleAuth = require('google-auth-library');
-var CLIENT_ID = '578466896799-k9k6ugjrb3rncqsg8jbfcpeoar8bgndl.apps.googleusercontent.com'
+var CLIENT_ID = sails.config.keys.GOOGLE_CLIENT_ID
 
 module.exports = {
 	'loginStatus': (req, res) => {

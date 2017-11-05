@@ -13,6 +13,11 @@ module.exports.seeds = {
       name: 'Adithya Kumar',
       email: '111501017@smail.iitpkd.ac.in',
       type: 'admin'
+    },
+    {
+      name: 'Kasiviswanathan S',
+      email: 'kasi@iitpkd.ac.in',
+      type: 'admin'
     }
   ]
 }
