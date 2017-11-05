@@ -4,6 +4,7 @@ import MyCourses from '../components/MyCourses'
 import Course from '../components/Course'
 import Group from '../components/Group'
 import Hello from '../components/Hello'
+import Bulk from '../components/Bulk'
 
 Vue.use(Router)
 
@@ -31,6 +32,12 @@ export default new Router({
       path: '/group',
       name: 'Group',
       component: Group,
+      props: true
+    },
+    {
+      path: '/bulk',
+      name: 'Bulk',
+      component: Bulk,
       props: true
     }
   ]

@@ -51,5 +51,29 @@ module.exports = {
 		} catch (e) {
 			res.json({error: e})
 		}
-	}
+	},
+	'create': async (req, res) => {
+		try {
+			var data = {
+				name: req.body.name,
+				email: req.body.email,
+				type: 'user'
+			}
+			var user = await User.create(data)
+			var groupCodes = req.body.groupCodes
+			var validGroups = await Group.find({code: groupCodes})
+			user.groupList.add(validGroups)
+			user.save((e) => {
+				if (e) {
+					User.destroy({id: user.id})
+					throw Error(e)
+				} else {
+					res.json({status: true})
+				}
+			})
+		} catch (e) {
+			console.log(e);
+			res.json({error: e})
+		}
+	},
 };

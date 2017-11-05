@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container">
-      <h1 class="title">My Groups.</h1>
+      <h1 class="title">Groups.</h1>
       <hr />
       <div class="content">
         <blockquote v-if="heavenProp.checkScore(heavenProp.user.type) <= 1">

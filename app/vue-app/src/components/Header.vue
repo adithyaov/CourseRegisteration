@@ -21,32 +21,15 @@
             <router-link v-if="heavenProp.checkScore(heavenProp.user.type) >= 1" class="navbar-item" :to="{ path: '/my-courses' }">
               My Courses
             </router-link>
-            <div class="navbar-item has-dropdown is-hoverable" v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
-              <a class="navbar-link">
-                Group
-              </a>
-              <div class="navbar-dropdown is-boxed">
-                <router-link class="navbar-item" :to="{ path: '/group' }">
-                  Manage groups
-                </router-link>
-                <a class="navbar-item " href="https://bulma.io/documentation/modifiers/syntax/">
-                  Bulk upload
-                </a>
-              </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable" v-if="heavenProp.checkScore(heavenProp.user.type) >= 2">
-              <a class="navbar-link">
-                Course
-              </a>
-              <div class="navbar-dropdown is-boxed">
-                <router-link class="navbar-item" :to="{ path: '/course' }">
-                  Manage courses
-                </router-link>
-                <a class="navbar-item " href="https://bulma.io/documentation/modifiers/syntax/">
-                  Bulk upload
-                </a>
-              </div>
-            </div>
+            <router-link v-if="heavenProp.checkScore(heavenProp.user.type) >= 2" class="navbar-item" :to="{ path: '/course' }">
+              Courses
+            </router-link>
+            <router-link v-if="heavenProp.checkScore(heavenProp.user.type) >= 2" class="navbar-item" :to="{ path: '/group' }">
+              Groups
+            </router-link>
+            <router-link v-if="heavenProp.checkScore(heavenProp.user.type) >= 2" class="navbar-item" :to="{ path: '/bulk' }">
+              Bulk Post
+            </router-link>
           </div>
 
           <div class="navbar-end">
