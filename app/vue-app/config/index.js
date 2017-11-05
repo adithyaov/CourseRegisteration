@@ -5,12 +5,26 @@
 
 const path = require('path')
 
+const sails = {
+    relPathIndex: '../../sails-app/assets/index.html',
+    relPathAssets: '../../sails-app/assets',
+    assetsDirName: 'static'
+}
+
+const defaults = {
+    relPathIndex: '../dist/index.html',
+    relPathAssets: '../dist',
+    assetsDirName: 'static'
+}
+
+const current = sails
+
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    index: path.resolve(__dirname, current.relPathIndex),
+    assetsRoot: path.resolve(__dirname, current.relPathAssets),
+    assetsSubDirectory: current.assetsDirName,
     assetsPublicPath: '/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
