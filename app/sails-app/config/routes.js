@@ -38,6 +38,8 @@ module.exports.routes = {
 
   'post /user/authenticate': 'UserController.authenticate',
   'post /user/create': 'UserController.create',
+  'post /user/promote': 'UserController.promote',
+  'post /user/demote': 'UserController.demote',
   'post /user/logout': 'UserController.logout',
   'get /user/loginStatus': 'UserController.loginStatus',
 

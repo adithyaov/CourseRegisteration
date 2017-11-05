@@ -31,6 +31,8 @@ module.exports.policies = {
   'UserController.logout': true,
   'UserController.loginStatus': true,
   'UserController.create': 'isOwner',
+  'UserController.promote': 'isAdmin',
+  'UserController.demote': 'isAdmin',
 
   'CourseController.list': 'isUser',
   'CourseController.owned': 'isOwner',
